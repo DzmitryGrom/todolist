@@ -1,4 +1,3 @@
-
 @numb-12: 12px;
 @numb-15: 15px;
 @numb-16: 16px;
@@ -68,6 +67,10 @@
   -webkit-transition: color .2s ease;
   transition: color .2s ease;
 }
+.transition-fill-color() {
+  -webkit-transition: fill .2s ease;
+  transition: fill .2s ease;
+}
 
 .transition-border-color() {
   -webkit-transition: border-color .2s ease;
@@ -115,6 +118,12 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+}
+
+.popup-prop () {
+  border-radius: @border-radius-default;
+  background-color: @color-white;
+  box-shadow: -7px 8px 16px 0 rgba(58, 70, 93, 0.07), -1px 1px 4px 0 rgba(58, 70, 93, 0.12);
 }
 
 .form-prop () {
@@ -263,10 +272,40 @@ a {
   padding-top: 90px;
 }
 
+/*icons*/
+[class^="icon-"], [class*=" icon-"] {
+  font-size: 24px;
+  vertical-align: middle;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 1;
+  cursor: pointer;
+  path {
+    .transition-fill-color();
+    fill: @color-gray;
+  }
+  &:hover {
+    path {
+      fill: @color-black;
+    }
+  }
+}
+
+
 .calendar {
   &__week {
     .flex-justify-content-center();
     padding: 0 0 30px;
+  }
+  &__icon {
+    &-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      padding: 16px;
+    }
   }
   &__label {
     font-weight: bold;
@@ -286,15 +325,107 @@ a {
     &-name {
       color: @color-black;
     }
-    &-inner {
-      min-height: 360px;
+
+  }
+  &__note {
+    .popup-prop();
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    z-index: 2;
+    padding: 50px 16px 16px 16px;
+  }
+  &__inner {
+    min-height: 360px;
+    display: block;
+    padding: 16px;
+    position: relative;
+    z-index: 1;
+    background-color: @color-white;
+    box-shadow: -1px 1px 4px 0 rgba(58,70,93,.12);
+    border-radius: @border-radius-default;
+    position: relative;
+    z-index: 1;
+  }
+  &__btn {
+    &-add {
+      line-height: 1;
+      display: inline-block;
+      cursor: pointer;
+      color: @color-gray;
+      &:hover {
+        &-text {}
+        color: @color-black;
+        path {
+          fill: @color-black;
+        }
+      }
+    }
+    &-text {
+      display: inline-block;
+      vertical-align: middle;
+      .transition-color();
+    }
+    &-delete {
+      display: inline-block;
+      vertical-align: middle;
+      padding: 10px;
+      cursor: pointer;
+      path {
+        fill: @color-red;
+      }
+    }
+    &-send {
+      width: 53px;
+      height: 40px;
+      font-size: 16px;
+      background: @color-transparent;
+      border-radius: @border-radius-default;
+      .transition-border-color();
+      cursor: pointer;
+      &:hover {
+        border-color: @color-black;
+      }
+      &:disabled {
+        background-color: #c4c7cc;
+        cursor: initial;
+      }
+    }
+  }
+  &__row {
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 2;
+    &-label {
       display: block;
-      padding: 16px;
-      position: relative;
-      z-index: 1;
-      background-color: @color-white;
-      box-shadow: -1px 1px 4px 0 rgba(58,70,93,.12);
-      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 17px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: @color-gray;
+      margin-bottom: 6px;
+    }
+  }
+  &__input, &__textarea {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    min-height: 40px;
+    padding: 12px 8px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 400;
+    color: @color-dark-gray;
+    font-size: 14px;
+    background-color: @color-white;
+    border: solid 1px @color-light-gray;
+    border-radius: @border-radius-default;
+    box-sizing: border-box;
+    .transition-border-color();
+    &:hover {
+      border-color: @color-black;
     }
   }
 }

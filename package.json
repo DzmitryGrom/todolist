@@ -12,8 +12,6 @@
     "browser-sync": "^2.24.6",
     "gulp": "^3.9.1",
     "gulp-less": "^4.0.1",
-    "gulp-iconfont": "^9.1.0",
-    "gulp-iconfont-css": "^2.1.0",
     "jasmine": "^3.1.0"
   },
   "author": "",
