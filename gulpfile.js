@@ -7,7 +7,7 @@ var reload      = browserSync.reload;
 gulp.task('compile-less', function() {
   gulp.src('./src/less/main.less')
     .pipe(less())
-    .pipe(gulp.dest('./dist/css/'));
+    .pipe(gulp.dest('./src/css/'));
 });
 
 /* Task to watch less changes */
@@ -15,17 +15,17 @@ gulp.task('watch-less', function() {
   gulp.watch('./src/less/**/*.less' , ['compile-less']);
 });
 
-
 gulp.task('serve', function () {
 
   // Serve files from the root of this project
   browserSync.init({
     server: {
-      baseDir: "./dist/"
+      baseDir: "./src/"
     }
   });
   gulp.watch("./src/less/*.less").on("change", reload);
-  gulp.watch("./dist/*.html").on("change", reload);
+  gulp.watch("./src/js/*.js").on("change", reload);
+  gulp.watch("./src/*.html").on("change", reload);
 });
 
 /* Task when running `gulp` from terminal */

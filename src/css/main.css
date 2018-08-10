@@ -1,3 +1,28 @@
+/*icons*/
+[class^="icon-"],
+[class*=" icon-"] {
+  font-size: 24px;
+  vertical-align: middle;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+[class^="icon-"] path,
+[class*=" icon-"] path,
+[class^="icon-"] polygon,
+[class*=" icon-"] polygon {
+  -webkit-transition: fill 0.2s ease;
+  transition: fill 0.2s ease;
+  fill: #9aa5ab;
+}
+[class^="icon-"]:hover path,
+[class*=" icon-"]:hover path,
+[class^="icon-"]:hover polygon,
+[class*=" icon-"]:hover polygon {
+  fill: #333333;
+}
 html,
 body {
   margin: 0;
@@ -35,13 +60,19 @@ a {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  max-width: 1175px;
+  max-width: 1085px;
   margin: 0 auto;
   height: 70px;
+  padding: 0 15px;
 }
-@media all and (max-width: 1210px) {
+@media all and (min-width: 1500px) {
   .header__inner {
-    width: 90%;
+    max-width: 1450px;
+  }
+}
+@media all and (min-width: 1900px) {
+  .header__inner {
+    max-width: 1810px;
   }
 }
 .header__today {
@@ -57,8 +88,7 @@ a {
   color: #9aa5ab;
 }
 .header__list {
-  max-width: 943px;
-  margin: 0 auto;
+  margin-left: auto;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -66,12 +96,38 @@ a {
   position: relative;
   z-index: 1;
 }
+@media all and (max-width: 920px) {
+  .header__list {
+    padding: 30px 10px 20px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    background-color: #fff;
+    overflow: auto;
+    box-shadow: -1px 1px 4px 0 rgba(58, 70, 93, 0.12);
+    transform: translateX(100%);
+    transition: all 0.2s ease;
+    -vendors-transition: all 0.2s ease;
+  }
+}
+.header__list_open {
+  transform: translateX(0%);
+}
 .header__item {
   display: block;
   font-weight: bold;
   color: #9aa5ab;
   font-size: 16px;
   padding: 26px 12px;
+}
+@media all and (max-width: 920px) {
+  .header__item {
+    flex: 1 0 100%;
+    padding: 12px;
+    box-sizing: border-box;
+  }
 }
 .header__item-active {
   position: absolute;
@@ -81,36 +137,70 @@ a {
   transition: 0.4s ease-out;
   transition-delay: 0.1s;
 }
+@media all and (max-width: 920px) {
+  .header__item-active {
+    display: none;
+  }
+}
+.header__icon-burger {
+  display: none;
+}
+@media all and (max-width: 920px) {
+  .header__icon-burger {
+    display: inline-block;
+  }
+}
+.header__icon-close {
+  display: none;
+  position: absolute;
+  top: 5px;
+  left: 16px;
+  z-index: 3;
+}
+@media all and (max-width: 920px) {
+  .header__icon-close {
+    display: inline-block;
+  }
+}
 .main {
   height: 100%;
   padding-top: 90px;
 }
-/*icons*/
-[class^="icon-"],
-[class*=" icon-"] {
-  font-size: 24px;
-  vertical-align: middle;
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  line-height: 1;
-  cursor: pointer;
+.calendar {
+  max-width: 1085px;
+  margin: 0 auto;
 }
-[class^="icon-"] path,
-[class*=" icon-"] path {
-  -webkit-transition: fill 0.2s ease;
-  transition: fill 0.2s ease;
-  fill: #9aa5ab;
+@media all and (min-width: 1500px) {
+  .calendar {
+    max-width: 1450px;
+  }
 }
-[class^="icon-"]:hover path,
-[class*=" icon-"]:hover path {
-  fill: #333333;
+@media all and (min-width: 1900px) {
+  .calendar {
+    max-width: 1810px;
+  }
+}
+@media all and (max-width: 1100px) {
+  .calendar {
+    max-width: 720px;
+  }
+}
+@media all and (max-width: 720px) {
+  .calendar {
+    max-width: 360px;
+  }
+}
+@media all and (max-width: 400px) {
+  .calendar {
+    width: 100%;
+  }
 }
 .calendar__week {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 0 0 30px;
+  margin-bottom: 50px;
 }
 .calendar__icon-close {
   position: absolute;
@@ -135,19 +225,47 @@ a {
   margin: 0 15px;
   padding-top: 32px;
 }
+@media all and (max-width: 360px) {
+  .calendar__day {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
 .calendar__day-name {
   color: #333333;
 }
-.calendar__note {
+.calendar__note,
+.calendar__note-form {
   border-radius: 4px;
   background-color: #fff;
   box-shadow: -7px 8px 16px 0 rgba(58, 70, 93, 0.07), -1px 1px 4px 0 rgba(58, 70, 93, 0.12);
+}
+.calendar__note {
+  margin-bottom: 20px;
+  padding: 16px;
+}
+.calendar__note-text {
+  font-size: 12px;
+  white-space: pre-line;
+  font-weight: 400;
+  color: #c4c7cc;
+  line-height: 1;
+}
+.calendar__note-text_black {
+  color: #333333;
+  margin: 7px 0 20px;
+}
+.calendar__note-text_blue {
+  color: #1f8ceb;
+}
+.calendar__note-form {
   position: absolute;
   top: 16px;
   left: 16px;
   right: 16px;
-  z-index: 2;
   padding: 50px 16px 16px 16px;
+  z-index: 2;
 }
 .calendar__inner {
   min-height: 360px;
@@ -158,6 +276,11 @@ a {
   border-radius: 4px;
   position: relative;
   z-index: 1;
+}
+@media all and (max-width: 360px) {
+  .calendar__inner {
+    border-radius: 0;
+  }
 }
 .calendar__btn-add {
   line-height: 1;
@@ -219,7 +342,8 @@ a {
   margin-bottom: 6px;
 }
 .calendar__input,
-.calendar__textarea {
+.calendar__textarea,
+.calendar__select {
   display: flex;
   flex: 1 1 auto;
   align-items: center;
@@ -238,6 +362,49 @@ a {
   transition: border-color 0.2s ease;
 }
 .calendar__input:hover,
-.calendar__textarea:hover {
+.calendar__textarea:hover,
+.calendar__select:hover {
   border-color: #333333;
+}
+.calendar__select {
+  background-image: url(../interface/arrow_select.svg);
+  background-repeat: no-repeat;
+  background-position: 95%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.calendar__tooltip {
+  display: none;
+  position: absolute;
+  right: 3px;
+  top: -45px;
+  z-index: 3;
+  border-radius: 4px;
+  background-color: #1f8ceb;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 400;
+  padding: 8px 10px;
+  width: 220px;
+}
+.calendar__tooltip:before {
+  content: "";
+  right: 3px;
+  bottom: -4px;
+  height: 12px;
+  background-color: #1f8ceb;
+  width: 12px;
+  position: absolute;
+  transform: rotate(45deg);
+}
+.calendar__info {
+  display: inline-block;
+  position: absolute;
+  top: -5px;
+  right: -4px;
+  z-index: 2;
+}
+.calendar__info:hover .calendar__tooltip {
+  display: block;
 }
