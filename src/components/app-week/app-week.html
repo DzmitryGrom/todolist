@@ -1,0 +1,36 @@
+<link rel="import" href="../app-day/app-day.html">
+<template id="appWeek">
+  <style>
+    :host {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      padding: 0 0 30px;
+      margin-bottom: 50px;
+    }
+  </style>
+  <app-day></app-day>
+</template>
+
+<script>
+  (() => {
+
+    const tmpl = document.currentScript.ownerDocument.querySelector('#appWeek');
+
+  customElements.define('app-week', class extends HTMLElement {
+    constructor() {
+      super();
+
+      let rootElem = tmpl.content.cloneNode(true),
+        shadowRoot = this.attachShadow({mode: 'open'}),
+        isOpen = false;
+
+      shadowRoot.appendChild(rootElem);
+
+    }
+  });
+
+  })();
+</script>

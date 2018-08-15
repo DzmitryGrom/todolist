@@ -1,0 +1,30 @@
+<link rel="import" href="../app-header/app-header.html">
+<link rel="import" href="../app-calendar/app-calendar.html">
+<template id="appRoot">
+  <style>
+    @import "/components/app-root/app-root.css";
+    :host {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <app-header></app-header>
+  <app-calendar></app-calendar>
+</template>
+
+<script>
+  (() => {
+
+    const tmpl = document.currentScript.ownerDocument.querySelector('#appRoot');
+
+    customElements.define('app-root', class extends HTMLElement {
+      constructor() {
+        super();
+        let shadowRoot = this.attachShadow({mode: 'open'});
+        shadowRoot.appendChild(tmpl.content.cloneNode(true));
+      }
+    });
+
+  })();
+</script>

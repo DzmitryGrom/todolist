@@ -22,6 +22,7 @@
   "homepage": "https://github.com/DzmitryGrom/todolist#readme",
   "dependencies": {
     "gulp-sass": "2.1.0",
+    "moment": "2.22.2",
     "node-sass": "3.4.1"
   }
 }

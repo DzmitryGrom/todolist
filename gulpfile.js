@@ -5,14 +5,23 @@ var reload      = browserSync.reload;
 
 /* Task to compile less */
 gulp.task('compile-less', function() {
-  gulp.src('./src/less/main.less')
+  gulp.src('./src/components/app-root/app-root.less')
     .pipe(less())
-    .pipe(gulp.dest('./src/css/'));
+    .pipe(gulp.dest('./src/components/app-root/'));
+
+  gulp.src('./src/components/app-header/app-header.less')
+    .pipe(less())
+    .pipe(gulp.dest('./src/components/app-header/'));
+
+  gulp.src('./src/components/app-day/app-day.less')
+    .pipe(less())
+    .pipe(gulp.dest('./src/components/app-day/'));
 });
 
 /* Task to watch less changes */
 gulp.task('watch-less', function() {
   gulp.watch('./src/less/**/*.less' , ['compile-less']);
+  gulp.watch('./src/components/**/*.less' , ['compile-less']);
 });
 
 gulp.task('serve', function () {
@@ -24,8 +33,9 @@ gulp.task('serve', function () {
     }
   });
   gulp.watch("./src/less/*.less").on("change", reload);
+  gulp.watch("./src/components/**/*.less").on("change", reload);
   gulp.watch("./src/js/*.js").on("change", reload);
-  gulp.watch("./src/*.html").on("change", reload);
+  gulp.watch("./src/components/**/*.html").on("change", reload);
 });
 
 /* Task when running `gulp` from terminal */

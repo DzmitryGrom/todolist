@@ -1,0 +1,47 @@
+/*icons*/
+[class^="icon-"],
+[class*=" icon-"] {
+  font-size: 24px;
+  vertical-align: middle;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+[class^="icon-"] path,
+[class*=" icon-"] path,
+[class^="icon-"] polygon,
+[class*=" icon-"] polygon {
+  -webkit-transition: fill 0.2s ease;
+  transition: fill 0.2s ease;
+  fill: #9aa5ab;
+}
+[class^="icon-"]:hover path,
+[class*=" icon-"]:hover path,
+[class^="icon-"]:hover polygon,
+[class*=" icon-"]:hover polygon {
+  fill: #333333;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #f6f9fb;
+  -webkit-font-smoothing: auto;
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+}
+*:focus {
+  outline: none;
+}
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
