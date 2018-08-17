@@ -16,16 +16,17 @@
     const tmpl = document.currentScript.ownerDocument.querySelector('#appMonth');
 
   customElements.define('app-month', class extends HTMLElement {
+
     constructor() {
+
       super();
 
       let rootElem = tmpl.content.cloneNode(true),
-        shadowRoot = this.attachShadow({mode: 'open'}),
-        isOpen = false;
+          shadowRoot = this.attachShadow({mode: 'open'});
 
       shadowRoot.appendChild(rootElem);
-
     }
+
   });
 
   })();

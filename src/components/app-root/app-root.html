@@ -19,11 +19,15 @@
     const tmpl = document.currentScript.ownerDocument.querySelector('#appRoot');
 
     customElements.define('app-root', class extends HTMLElement {
+
       constructor() {
+
         super();
         let shadowRoot = this.attachShadow({mode: 'open'});
         shadowRoot.appendChild(tmpl.content.cloneNode(true));
+
       }
+
     });
 
   })();

@@ -14,10 +14,7 @@
   </style>
   <div class="header">
     <div class="header__inner">
-      <div class="header__today">
-        <span class="header__today-name">сегодня</span>
-        <p class="header__today-date">воскресенье, 5 августа</p>
-      </div>
+      <div class="header__today"></div>
       <div class="header__list">
         <i class="header__icon-close icon-close">
           <svg id="burger" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -64,7 +61,13 @@
         const menuActiveSolid = shadowRoot.querySelector('.header__item-active'),
               burger = shadowRoot.querySelector('#burger'),
               menuList = shadowRoot.querySelector('.header__list'),
-              btnCloseMenu = shadowRoot.querySelector('.header__icon-close');
+              headerDate = shadowRoot.querySelector('.header__today'),
+              now = moment(),
+              day = now.format('dddd, DD MMMM');
+
+        moment.lang('ru');
+
+        headerDate.innerHTML = `<p class="header__today-name">сегодня</p> <p class="header__today-date" day="${day}">${day}</p>`;
 
         shadowRoot.addEventListener("click", event => {
           const currentElement = event.target;
@@ -83,11 +86,15 @@
 
         shadowRoot.addEventListener("click", event => {
 
+
           const currentElement = event.target;
-          menuActiveSolid.style.width = currentElement.clientWidth + 'px';
-          menuActiveSolid.style.left = currentElement.offsetLeft + 'px';
+          if(currentElement.tagName === 'SPAN') {
+            menuActiveSolid.style.width = currentElement.clientWidth + 'px';
+            menuActiveSolid.style.left = currentElement.offsetLeft + 'px';
+          }
 
         });
+
 
       }
     });

@@ -29,7 +29,7 @@ gulp.task('serve', function () {
   // Serve files from the root of this project
   browserSync.init({
     server: {
-      baseDir: "./src/"
+      baseDir: ["./" , "./src/"]
     }
   });
   gulp.watch("./src/less/*.less").on("change", reload);
