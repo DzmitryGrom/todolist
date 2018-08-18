@@ -35,69 +35,70 @@
         <div style="width: 54.91px; left: 0px" class="header__item-active"></div>
       </div>
       <span class="header__icon-burger icon-burger">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="#556066" fill-rule="evenodd" d="M4.422 7.031a.814.814 0 0 1-.14-.226.733.733 0 0 1-.048-.274.75.75 0 0 1 .047-.265.607.607 0 0 1 .36-.36.75.75 0 0 1 .265-.047h14.266a.75.75 0 0 1 .265.047.607.607 0 0 1 .36.36.75.75 0 0 1 .047.265.733.733 0 0 1-.047.274.814.814 0 0 1-.14.226.607.607 0 0 1-.22.14.75.75 0 0 1-.265.048H4.906a.75.75 0 0 1-.265-.047.607.607 0 0 1-.22-.14zm15.234 4.453c.063.063.11.136.14.22a.75.75 0 0 1 .048.265.75.75 0 0 1-.047.265.607.607 0 0 1-.36.36.75.75 0 0 1-.265.047H4.906a.75.75 0 0 1-.265-.047.607.607 0 0 1-.36-.36.75.75 0 0 1-.047-.265.75.75 0 0 1 .047-.266.607.607 0 0 1 .36-.36.75.75 0 0 1 .265-.046h14.266a.75.75 0 0 1 .265.047.607.607 0 0 1 .22.14zm0 5.422c.063.063.11.136.14.219a.75.75 0 0 1 .048.266.733.733 0 0 1-.047.273.814.814 0 0 1-.14.227.607.607 0 0 1-.22.14.75.75 0 0 1-.265.047H4.906a.75.75 0 0 1-.265-.047.607.607 0 0 1-.22-.14.814.814 0 0 1-.14-.227.733.733 0 0 1-.047-.273.75.75 0 0 1 .047-.266.607.607 0 0 1 .36-.36.75.75 0 0 1 .265-.046h14.266a.75.75 0 0 1 .265.047.607.607 0 0 1 .22.14z"/>
-                </svg>
-            </span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#556066" fill-rule="evenodd" d="M4.422 7.031a.814.814 0 0 1-.14-.226.733.733 0 0 1-.048-.274.75.75 0 0 1 .047-.265.607.607 0 0 1 .36-.36.75.75 0 0 1 .265-.047h14.266a.75.75 0 0 1 .265.047.607.607 0 0 1 .36.36.75.75 0 0 1 .047.265.733.733 0 0 1-.047.274.814.814 0 0 1-.14.226.607.607 0 0 1-.22.14.75.75 0 0 1-.265.048H4.906a.75.75 0 0 1-.265-.047.607.607 0 0 1-.22-.14zm15.234 4.453c.063.063.11.136.14.22a.75.75 0 0 1 .048.265.75.75 0 0 1-.047.265.607.607 0 0 1-.36.36.75.75 0 0 1-.265.047H4.906a.75.75 0 0 1-.265-.047.607.607 0 0 1-.36-.36.75.75 0 0 1-.047-.265.75.75 0 0 1 .047-.266.607.607 0 0 1 .36-.36.75.75 0 0 1 .265-.046h14.266a.75.75 0 0 1 .265.047.607.607 0 0 1 .22.14zm0 5.422c.063.063.11.136.14.219a.75.75 0 0 1 .048.266.733.733 0 0 1-.047.273.814.814 0 0 1-.14.227.607.607 0 0 1-.22.14.75.75 0 0 1-.265.047H4.906a.75.75 0 0 1-.265-.047.607.607 0 0 1-.22-.14.814.814 0 0 1-.14-.227.733.733 0 0 1-.047-.273.75.75 0 0 1 .047-.266.607.607 0 0 1 .36-.36.75.75 0 0 1 .265-.046h14.266a.75.75 0 0 1 .265.047.607.607 0 0 1 .22.14z"/>
+          </svg>
+      </span>
     </div>
   </div>
 </template>
 
 <script>
   (() => {
-
-    const tmpl = document.currentScript.ownerDocument.querySelector('#header');
-
-    customElements.define('app-header', class extends HTMLElement {
+    const template = document.currentScript.ownerDocument.querySelector('template');
+  appHeaderFactory.$inject = ['app.main.model.view'];
+  Core.module('app.main').component('app.main.component.appHeader', appHeaderFactory);
+  function appHeaderFactory(viewModel) {
+    class AppHeader extends HTMLElement {
       constructor() {
         super();
 
-        let rootElem = tmpl.content.cloneNode(true),
-            shadowRoot = this.attachShadow({mode: 'open'}),
-            isOpen = false;
+        const shadowRoot = this.attachShadow({mode: 'open'});
+        this.rootElement = template.content.cloneNode(true);
 
-        shadowRoot.appendChild(rootElem);
+        this.shadowRoot.appendChild(this.rootElement);
 
         const menuActiveSolid = shadowRoot.querySelector('.header__item-active'),
-              burger = shadowRoot.querySelector('#burger'),
               menuList = shadowRoot.querySelector('.header__list'),
               headerDate = shadowRoot.querySelector('.header__today'),
+              burger = shadowRoot.querySelector('#burger'),
               now = moment(),
+              isOpen = false,
               day = now.format('dddd, DD MMMM');
 
+
         moment.lang('ru');
-
         headerDate.innerHTML = `<p class="header__today-name">сегодня</p> <p class="header__today-date" day="${day}">${day}</p>`;
-
         shadowRoot.addEventListener("click", event => {
           const currentElement = event.target;
-          if (currentElement.parentNode.classList.contains('icon-burger')) {
-            isOpen = true;
-          }
-          if (currentElement.parentNode.classList.contains('icon-close')) {
-            isOpen = false;
-          }
-          if (isOpen === true) {
-            menuList.classList.add('header__list_open');
-          } else {
-            menuList.classList.remove('header__list_open');
-          }
-        });
+        if (currentElement.parentNode.classList.contains('icon-burger')) {
+          isOpen = true;
+        }
+        if (currentElement.parentNode.classList.contains('icon-close')) {
+          isOpen = false;
+        }
+        if (isOpen === true) {
+          menuList.classList.add('header__list_open');
+        } else {
+          menuList.classList.remove('header__list_open');
+        }
+      });
 
         shadowRoot.addEventListener("click", event => {
 
 
           const currentElement = event.target;
-          if(currentElement.tagName === 'SPAN') {
-            menuActiveSolid.style.width = currentElement.clientWidth + 'px';
-            menuActiveSolid.style.left = currentElement.offsetLeft + 'px';
-          }
+        if(currentElement.tagName === 'SPAN') {
+          menuActiveSolid.style.width = currentElement.clientWidth + 'px';
+          menuActiveSolid.style.left = currentElement.offsetLeft + 'px';
+        }
 
-        });
-
-
+      });
       }
-    });
+    }
+    customElements.define('app-header', AppHeader);
 
+    return AppHeader;
+  }
   })();
 </script>

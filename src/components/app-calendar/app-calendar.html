@@ -1,5 +1,4 @@
-<link rel="import" href="../app-month/app-month.html">
-<template id="appCalendar">
+<template>
   <style>
     :host {
       display: block;
@@ -25,28 +24,29 @@
         width: 100%;
       }
     }
-
   </style>
   <app-month></app-month>
 </template>
 
 <script>
   (() => {
+    const template = document.currentScript.ownerDocument.querySelector('template');
+  appViewCalendarFactory.$inject = ['app.main.model.view',];
+  Core.module('app.main').component('app.main.component.appViewMain', appViewCalendarFactory);
+  function appViewCalendarFactory(viewModel) {
 
-    const tmpl = document.currentScript.ownerDocument.querySelector('#appCalendar');
+    class AppCalendar extends HTMLElement {
+      constructor() {
+        super();
+        this.shadow = this.attachShadow({mode: 'open'});
+        this.rootElement = template.content.cloneNode(true);
+        this.containerElement = this.rootElement.querySelector('#container');
+        this.shadow.appendChild(this.rootElement);
 
-  customElements.define('app-calendar', class extends HTMLElement {
-    constructor() {
-      super();
-
-      let rootElem = tmpl.content.cloneNode(true),
-        shadowRoot = this.attachShadow({mode: 'open'}),
-        isOpen = false;
-
-      shadowRoot.appendChild(rootElem);
-
+      }
     }
-  });
-
+    customElements.define('app-calendar', AppCalendar);
+    return AppCalendar;
+  }
   })();
 </script>

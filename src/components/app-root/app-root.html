@@ -1,5 +1,3 @@
-<link rel="import" href="../app-header/app-header.html">
-<link rel="import" href="../app-calendar/app-calendar.html">
 <template id="appRoot">
   <style>
     @import "/components/app-root/app-root.css";
@@ -15,20 +13,20 @@
 
 <script>
   (() => {
-
-    const tmpl = document.currentScript.ownerDocument.querySelector('#appRoot');
-
-    customElements.define('app-root', class extends HTMLElement {
-
+    const template = document.currentScript.ownerDocument.querySelector('template');
+  AppRootFactory.$inject = [];
+  Core.module('app.main').component('app.main.component.appRoot', AppRootFactory);
+  function AppRootFactory() {
+    class AppRoot extends HTMLElement {
       constructor() {
-
         super();
-        let shadowRoot = this.attachShadow({mode: 'open'});
-        shadowRoot.appendChild(tmpl.content.cloneNode(true));
-
+        this.shadow = this.attachShadow({mode: 'open'});
+        this.rootElement = template.content.cloneNode(true);
+        this.shadow.appendChild(this.rootElement);
       }
-
-    });
-
+    }
+    customElements.define('app-root', AppRoot);
+    return AppRoot;
+  }
   })();
 </script>

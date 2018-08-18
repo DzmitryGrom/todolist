@@ -1,4 +1,3 @@
-<link rel="import" href="../app-week/app-week.html">
 <template id="appMonth">
   <style>
     :host {
@@ -12,22 +11,23 @@
 
 <script>
   (() => {
+    const template = document.currentScript.ownerDocument.querySelector('template');
+  appViewMonthFactory.$inject = ['app.main.model.view',];
+  Core.module('app.main').component('app.main.component.appViewMain', appViewMonthFactory);
+  function appViewMonthFactory(viewModel) {
 
-    const tmpl = document.currentScript.ownerDocument.querySelector('#appMonth');
+    class AppMonth extends HTMLElement {
+      constructor() {
+        super();
+        this.shadow = this.attachShadow({mode: 'open'});
+        this.rootElement = template.content.cloneNode(true);
+        this.containerElement = this.rootElement.querySelector('#container');
+        this.shadow.appendChild(this.rootElement);
 
-  customElements.define('app-month', class extends HTMLElement {
-
-    constructor() {
-
-      super();
-
-      let rootElem = tmpl.content.cloneNode(true),
-          shadowRoot = this.attachShadow({mode: 'open'});
-
-      shadowRoot.appendChild(rootElem);
+      }
     }
-
-  });
-
+    customElements.define('app-month', AppMonth);
+    return AppMonth;
+  }
   })();
 </script>

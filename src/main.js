@@ -1,7 +1,11 @@
-(() => {
+const module = Core.module('app.main');
 
-  'use strict';
+module.run();
+
+const AppRootElement = module.get('app.main.component.appRoot'),
+      viewModel = module.get('app.main.model.view');
 
 
+const appRootElement = new AppRootElement();
 
-})();
+document.body.appendChild(appRootElement);

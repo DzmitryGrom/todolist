@@ -1,4 +1,3 @@
-<link rel="import" href="../app-day/app-day.html">
 <template id="appWeek">
   <style>
     :host {
@@ -10,66 +9,28 @@
       margin-bottom: 50px;
     }
   </style>
+  <app-day></app-day>
 </template>
 
 <script>
   (() => {
+    const template = document.currentScript.ownerDocument.querySelector('template');
+  appViewWeekFactory.$inject = ['app.main.model.view', ];
+  Core.module('app.main').component('app.main.component.appViewMain', appViewWeekFactory);
+  function appViewWeekFactory(viewModel) {
 
-    const tmpl = document.currentScript.ownerDocument.querySelector('#appWeek');
+    class AppWeek extends HTMLElement {
+      constructor() {
+        super();
+        this.shadow = this.attachShadow({mode: 'open'});
+        this.rootElement = template.content.cloneNode(true);
+        this.containerElement = this.rootElement.querySelector('#container');
+        this.shadow.appendChild(this.rootElement);
 
-  customElements.define('app-week', class extends HTMLElement {
-    constructor() {
-      super();
-
-      let rootElem = tmpl.content.cloneNode(true),
-        shadowRoot = this.attachShadow({mode: 'open'}),
-        isOpen = false;
-
-      shadowRoot.appendChild(rootElem);
-
-
-
-      const weeks = [],
-        params = {year: '2018', month: '1'},
-        todayDay = parseInt(moment().format('DMY')),
-        yesterDay = parseInt(moment().subtract(1, 'day').format('DMY')),
-        year = +params.year,
-        month = +params.month,
-        currentDate = moment([year, month - 1]);
-
-      const startDay = currentDate.clone().startOf('month').startOf('week');
-      const endDay = currentDate.clone().endOf('month').endOf('week');
-      let date = startDay.clone().subtract(1, 'day');
-
-      while (date.isBefore(endDay, 'day')) {
-        weeks.push(Array(7).fill(0).map(() => {
-            const d = date.add(1, 'day').clone();
-        const isYesterday = parseInt(d.format('DMY')) === yesterDay;
-        const isTodayDay = parseInt(d.format('DMY')) === todayDay;
-
-        return {
-          dayName: d.format('dddd'),
-          date: d.format('D MMMM'),
-          day: d.format('D'),
-          month: d.format('M'),
-          year: d.format('YYYY'),
-          isYesterday: isYesterday,
-          isCurrentDay: isTodayDay,
-          isCurrentMonth: parseInt(d.format('M')) === month
-        };
-
-      }));
       }
-//
-//      for (let i = 0; i < weeks.length; i++) {
-//        shadowRoot.innerHTML += `<app-day></app-day>`;
-//      }
-
-
-
-
     }
-  });
-
+    customElements.define('app-week', AppWeek);
+    return AppWeek;
+  }
   })();
 </script>
