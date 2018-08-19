@@ -14,7 +14,7 @@
       }
     }
   </style>
-  <label class="day__label"><span class="day__label-name">Пятница</span> 10 августа</label>
+  <label class="day__label"></label>
   <div class="day__inner">
     <div class="day__note-form">
       <i class="day__icon-close icon-close">
@@ -73,17 +73,25 @@
 <script>
   (() => {
     const template = document.currentScript.ownerDocument.querySelector('template');
-  appViewDayFactory.$inject = ['app.main.model.view'];
+  appViewDayFactory.$inject = ['app.main.model.view','app.main.model.calendar'];
   Core.module('app.main').component('app.main.component.appViewMain', appViewDayFactory);
-  function appViewDayFactory(viewModel) {
+  function appViewDayFactory(viewModel, calendarModel) {
 
     class AppDay extends HTMLElement {
       constructor() {
         super();
-        this.shadow = this.attachShadow({mode: 'open'});
+        const shadowRoot = this.attachShadow({mode: 'open'});
         this.rootElement = template.content.cloneNode(true);
         this.containerElement = this.rootElement.querySelector('#container');
-        this.shadow.appendChild(this.rootElement);
+        this.shadowRoot.appendChild(this.rootElement);
+        const dayLabel = shadowRoot.querySelector('.day__label');
+
+        let name = this.getAttribute('data-name'),
+            data = this.getAttribute('date');
+
+        dayLabel.innerHTML = `<span class="day__label-name">${name}, </span>${data}`;
+
+
 
       }
     }

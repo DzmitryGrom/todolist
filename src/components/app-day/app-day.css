@@ -1,3 +1,6 @@
+*:focus {
+  outline: none;
+}
 .day__icon-close {
   position: absolute;
   top: 0;

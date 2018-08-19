@@ -3,31 +3,37 @@
     :host {
       display: block;
       width: 100%;
+      min-height: 100%;
       height: 100%;
     }
   </style>
-  <app-week></app-week>
 </template>
 
 <script>
   (() => {
     const template = document.currentScript.ownerDocument.querySelector('template');
-  appViewMonthFactory.$inject = ['app.main.model.view',];
-  Core.module('app.main').component('app.main.component.appViewMain', appViewMonthFactory);
-  function appViewMonthFactory(viewModel) {
+    appViewMonthFactory.$inject = ['app.main.model.view','app.main.model.calendar'];
+    Core.module('app.main').component('app.main.component.appViewMain', appViewMonthFactory);
+    function appViewMonthFactory(viewModel, calendarModel) {
 
-    class AppMonth extends HTMLElement {
-      constructor() {
-        super();
-        this.shadow = this.attachShadow({mode: 'open'});
-        this.rootElement = template.content.cloneNode(true);
-        this.containerElement = this.rootElement.querySelector('#container');
-        this.shadow.appendChild(this.rootElement);
+      class AppMonth extends HTMLElement {
+        constructor() {
+          super();
+          const shadowRoot = this.attachShadow({mode: 'open'});
+          this.rootElement = template.content.cloneNode(true);
+
+          this.shadowRoot.appendChild(this.rootElement);
+
+          for (let i = 0; i < calendarModel.length; i++) {
+            const daysOfWeek = calendarModel[i].length;
+            shadowRoot.innerHTML += '<app-week data-id="' + i + '"></app-week>';
+          }
+
+        }
 
       }
+      customElements.define('app-month', AppMonth);
+      return AppMonth;
     }
-    customElements.define('app-month', AppMonth);
-    return AppMonth;
-  }
   })();
 </script>

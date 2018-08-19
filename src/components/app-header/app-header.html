@@ -1,6 +1,7 @@
 <template id="header">
   <style>
     @import "/components/app-header/app-header.css";
+
     :host {
       display: block;
       width: 100%;
@@ -18,25 +19,29 @@
       <div class="header__list">
         <i class="header__icon-close icon-close">
           <svg id="burger" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="#556066" d="M6.33048947,7.0021478 L0.133497402,13.2424335 C-0.0386655729,13.4157993 -0.0386655729,13.696665 0.133497402,13.8700308 C0.219469511,13.9568238 0.33234892,14 0.445009571,14 C0.55788898,14 0.670549631,13.9568238 0.756521739,13.8700308 L7.00010938,7.58282392 L13.243697,13.8700308 C13.3298879,13.9568238 13.4425485,14 13.5552092,14 C13.6678698,14 13.7807492,13.9568238 13.8667214,13.8700308 C14.0388843,13.696665 14.0388843,13.4157993 13.8667214,13.2424335 L7.66994804,7.0021478 L13.8708778,0.757456316 C14.0430407,0.584090569 14.0430407,0.303224842 13.8708778,0.129859095 C13.6987148,-0.043286365 13.4197976,-0.043286365 13.2478534,0.129859095 L7.00032814,6.42147167 L0.752146568,0.130079382 C0.579983593,-0.0430660782 0.301285206,-0.0430660782 0.129122231,0.130079382 C-0.0430407438,0.303445129 -0.0430407438,0.584310856 0.129122231,0.757676603 L6.33048947,7.0021478 Z" transform="translate(5 5)"/>
+            <path fill="#556066"
+                  d="M6.33048947,7.0021478 L0.133497402,13.2424335 C-0.0386655729,13.4157993 -0.0386655729,13.696665 0.133497402,13.8700308 C0.219469511,13.9568238 0.33234892,14 0.445009571,14 C0.55788898,14 0.670549631,13.9568238 0.756521739,13.8700308 L7.00010938,7.58282392 L13.243697,13.8700308 C13.3298879,13.9568238 13.4425485,14 13.5552092,14 C13.6678698,14 13.7807492,13.9568238 13.8667214,13.8700308 C14.0388843,13.696665 14.0388843,13.4157993 13.8667214,13.2424335 L7.66994804,7.0021478 L13.8708778,0.757456316 C14.0430407,0.584090569 14.0430407,0.303224842 13.8708778,0.129859095 C13.6987148,-0.043286365 13.4197976,-0.043286365 13.2478534,0.129859095 L7.00032814,6.42147167 L0.752146568,0.130079382 C0.579983593,-0.0430660782 0.301285206,-0.0430660782 0.129122231,0.130079382 C-0.0430407438,0.303445129 -0.0430407438,0.584310856 0.129122231,0.757676603 L6.33048947,7.0021478 Z"
+                  transform="translate(5 5)"/>
           </svg>
         </i>
-        <span class="header__item">Янв</span>
-        <span class="header__item">Фев</span>
-        <span class="header__item">Март</span>
-        <span class="header__item">Апр</span>
-        <span class="header__item">Май</span>
-        <span class="header__item">Июнь</span>
-        <span class="header__item">Июль</span>
-        <span class="header__item">Авг</span>
-        <span class="header__item">Сен</span>
-        <span class="header__item">Окт</span>
-        <span class="header__item">Дек</span>
+        <span class="header__item" tabindex="0">Янв</span>
+        <span class="header__item" tabindex="1">Фев</span>
+        <span class="header__item" tabindex="2">Март</span>
+        <span class="header__item" tabindex="3">Апр</span>
+        <span class="header__item" tabindex="4">Май</span>
+        <span class="header__item" tabindex="5">Июнь</span>
+        <span class="header__item" tabindex="6">Июль</span>
+        <span class="header__item" tabindex="7">Авг</span>
+        <span class="header__item" tabindex="8">Сен</span>
+        <span class="header__item" tabindex="9">Окт</span>
+        <span class="header__item" tabindex="10">Нояб</span>
+        <span class="header__item" tabindex="11">Дек</span>
         <div style="width: 54.91px; left: 0px" class="header__item-active"></div>
       </div>
       <span class="header__icon-burger icon-burger">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path fill="#556066" fill-rule="evenodd" d="M4.422 7.031a.814.814 0 0 1-.14-.226.733.733 0 0 1-.048-.274.75.75 0 0 1 .047-.265.607.607 0 0 1 .36-.36.75.75 0 0 1 .265-.047h14.266a.75.75 0 0 1 .265.047.607.607 0 0 1 .36.36.75.75 0 0 1 .047.265.733.733 0 0 1-.047.274.814.814 0 0 1-.14.226.607.607 0 0 1-.22.14.75.75 0 0 1-.265.048H4.906a.75.75 0 0 1-.265-.047.607.607 0 0 1-.22-.14zm15.234 4.453c.063.063.11.136.14.22a.75.75 0 0 1 .048.265.75.75 0 0 1-.047.265.607.607 0 0 1-.36.36.75.75 0 0 1-.265.047H4.906a.75.75 0 0 1-.265-.047.607.607 0 0 1-.36-.36.75.75 0 0 1-.047-.265.75.75 0 0 1 .047-.266.607.607 0 0 1 .36-.36.75.75 0 0 1 .265-.046h14.266a.75.75 0 0 1 .265.047.607.607 0 0 1 .22.14zm0 5.422c.063.063.11.136.14.219a.75.75 0 0 1 .048.266.733.733 0 0 1-.047.273.814.814 0 0 1-.14.227.607.607 0 0 1-.22.14.75.75 0 0 1-.265.047H4.906a.75.75 0 0 1-.265-.047.607.607 0 0 1-.22-.14.814.814 0 0 1-.14-.227.733.733 0 0 1-.047-.273.75.75 0 0 1 .047-.266.607.607 0 0 1 .36-.36.75.75 0 0 1 .265-.046h14.266a.75.75 0 0 1 .265.047.607.607 0 0 1 .22.14z"/>
+              <path fill="#556066" fill-rule="evenodd"
+                    d="M4.422 7.031a.814.814 0 0 1-.14-.226.733.733 0 0 1-.048-.274.75.75 0 0 1 .047-.265.607.607 0 0 1 .36-.36.75.75 0 0 1 .265-.047h14.266a.75.75 0 0 1 .265.047.607.607 0 0 1 .36.36.75.75 0 0 1 .047.265.733.733 0 0 1-.047.274.814.814 0 0 1-.14.226.607.607 0 0 1-.22.14.75.75 0 0 1-.265.048H4.906a.75.75 0 0 1-.265-.047.607.607 0 0 1-.22-.14zm15.234 4.453c.063.063.11.136.14.22a.75.75 0 0 1 .048.265.75.75 0 0 1-.047.265.607.607 0 0 1-.36.36.75.75 0 0 1-.265.047H4.906a.75.75 0 0 1-.265-.047.607.607 0 0 1-.36-.36.75.75 0 0 1-.047-.265.75.75 0 0 1 .047-.266.607.607 0 0 1 .36-.36.75.75 0 0 1 .265-.046h14.266a.75.75 0 0 1 .265.047.607.607 0 0 1 .22.14zm0 5.422c.063.063.11.136.14.219a.75.75 0 0 1 .048.266.733.733 0 0 1-.047.273.814.814 0 0 1-.14.227.607.607 0 0 1-.22.14.75.75 0 0 1-.265.047H4.906a.75.75 0 0 1-.265-.047.607.607 0 0 1-.22-.14.814.814 0 0 1-.14-.227.733.733 0 0 1-.047-.273.75.75 0 0 1 .047-.266.607.607 0 0 1 .36-.36.75.75 0 0 1 .265-.046h14.266a.75.75 0 0 1 .265.047.607.607 0 0 1 .22.14z"/>
           </svg>
       </span>
     </div>
@@ -46,59 +51,59 @@
 <script>
   (() => {
     const template = document.currentScript.ownerDocument.querySelector('template');
-  appHeaderFactory.$inject = ['app.main.model.view'];
-  Core.module('app.main').component('app.main.component.appHeader', appHeaderFactory);
-  function appHeaderFactory(viewModel) {
-    class AppHeader extends HTMLElement {
-      constructor() {
-        super();
+    appHeaderFactory.$inject = ['app.main.model.view'];
+    Core.module('app.main').component('app.main.component.appHeader', appHeaderFactory);
+    function appHeaderFactory(viewModel) {
+      class AppHeader extends HTMLElement {
+        constructor() {
+          super();
 
-        const shadowRoot = this.attachShadow({mode: 'open'});
-        this.rootElement = template.content.cloneNode(true);
+          const shadowRoot = this.attachShadow({mode: 'open'});
+          this.rootElement = template.content.cloneNode(true);
 
-        this.shadowRoot.appendChild(this.rootElement);
+          this.shadowRoot.appendChild(this.rootElement);
 
-        const menuActiveSolid = shadowRoot.querySelector('.header__item-active'),
-              menuList = shadowRoot.querySelector('.header__list'),
-              headerDate = shadowRoot.querySelector('.header__today'),
-              burger = shadowRoot.querySelector('#burger'),
-              now = moment(),
-              isOpen = false,
-              day = now.format('dddd, DD MMMM');
+          const menuActiveSolid = shadowRoot.querySelector('.header__item-active'),
+                menuList = shadowRoot.querySelector('.header__list'),
+                headerDate = shadowRoot.querySelector('.header__today'),
+                burger = shadowRoot.querySelector('#burger'),
+                now = moment(),
+                day = now.format('dddd, DD MMMM');
+
+          let isOpen = false;
 
 
-        moment.lang('ru');
-        headerDate.innerHTML = `<p class="header__today-name">сегодня</p> <p class="header__today-date" day="${day}">${day}</p>`;
-        shadowRoot.addEventListener("click", event => {
-          const currentElement = event.target;
-        if (currentElement.parentNode.classList.contains('icon-burger')) {
-          isOpen = true;
+          moment.lang('ru');
+          headerDate.innerHTML = `<p class="header__today-name">сегодня</p> <p class="header__today-date" day="${day}">${day}</p>`;
+          shadowRoot.addEventListener("click", event => {
+            const currentElement = event.target;
+            if (currentElement.parentNode.classList.contains('icon-burger')) {
+              isOpen = true;
+            }
+            if (currentElement.parentNode.classList.contains('icon-close')) {
+              isOpen = false;
+            }
+            if (isOpen === true) {
+              menuList.classList.add('header__list_open');
+            } else {
+              menuList.classList.remove('header__list_open');
+            }
+          });
+
+          shadowRoot.addEventListener("click", event => {
+            const currentElement = event.target;
+            if (currentElement.tagName === 'SPAN') {
+              let attr = currentElement.getAttribute('tabindex');
+              menuActiveSolid.style.width = currentElement.clientWidth + 'px';
+              menuActiveSolid.style.left = currentElement.offsetLeft + 'px';
+            }
+          });
+
         }
-        if (currentElement.parentNode.classList.contains('icon-close')) {
-          isOpen = false;
-        }
-        if (isOpen === true) {
-          menuList.classList.add('header__list_open');
-        } else {
-          menuList.classList.remove('header__list_open');
-        }
-      });
-
-        shadowRoot.addEventListener("click", event => {
-
-
-          const currentElement = event.target;
-        if(currentElement.tagName === 'SPAN') {
-          menuActiveSolid.style.width = currentElement.clientWidth + 'px';
-          menuActiveSolid.style.left = currentElement.offsetLeft + 'px';
-        }
-
-      });
       }
-    }
-    customElements.define('app-header', AppHeader);
+      customElements.define('app-header', AppHeader);
 
-    return AppHeader;
-  }
+      return AppHeader;
+    }
   })();
 </script>

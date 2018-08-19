@@ -1,3 +1,6 @@
+*:focus {
+  outline: none;
+}
 .header {
   box-shadow: 0 0 23px 0 rgba(0, 0, 0, 0.03);
   background-color: #fff;

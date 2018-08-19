@@ -23,21 +23,6 @@
 [class*=" icon-"]:hover polygon {
   fill: #333333;
 }
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  background-color: #f6f9fb;
-  -webkit-font-smoothing: auto;
-  font-family: 'Roboto', sans-serif;
-  overflow-x: hidden;
-}
 *:focus {
   outline: none;
 }

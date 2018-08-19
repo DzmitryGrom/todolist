@@ -9,28 +9,34 @@
       margin-bottom: 50px;
     }
   </style>
-  <app-day></app-day>
 </template>
 
 <script>
   (() => {
     const template = document.currentScript.ownerDocument.querySelector('template');
-  appViewWeekFactory.$inject = ['app.main.model.view', ];
-  Core.module('app.main').component('app.main.component.appViewMain', appViewWeekFactory);
-  function appViewWeekFactory(viewModel) {
+    appViewWeekFactory.$inject = ['app.main.model.view','app.main.model.calendar'];
+    Core.module('app.main').component('app.main.component.appViewMain', appViewWeekFactory);
+    function appViewWeekFactory(viewModel, calendarModel) {
+      class AppWeek extends HTMLElement {
+        constructor() {
+          super();
+          const shadowRoot = this.attachShadow({mode: 'open'}),
+                box = document.querySelector('app-week');
 
-    class AppWeek extends HTMLElement {
-      constructor() {
-        super();
-        this.shadow = this.attachShadow({mode: 'open'});
-        this.rootElement = template.content.cloneNode(true);
-        this.containerElement = this.rootElement.querySelector('#container');
-        this.shadow.appendChild(this.rootElement);
+          this.rootElement = template.content.cloneNode(true);
+          this.shadowRoot.appendChild(this.rootElement);
+
+          const attr = this.getAttribute('data-id');
+
+          for (let z = 0; z < calendarModel[attr].length; z++) {
+            shadowRoot.innerHTML +='<app-day date="'+ calendarModel[attr][z].date +'" data-name="'+ calendarModel[attr][z].dayName +'"></app-day>';
+          }
+        }
 
       }
+
+      customElements.define('app-week', AppWeek);
+      return AppWeek;
     }
-    customElements.define('app-week', AppWeek);
-    return AppWeek;
-  }
   })();
 </script>
