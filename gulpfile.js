@@ -16,6 +16,10 @@ gulp.task('compile-less', function() {
   gulp.src('./src/components/app-day/app-day.less')
     .pipe(less())
     .pipe(gulp.dest('./src/components/app-day/'));
+
+  gulp.src('./src/components/app-note/app-note.less')
+    .pipe(less())
+    .pipe(gulp.dest('./src/components/app-note/'));
 });
 
 /* Task to watch less changes */
