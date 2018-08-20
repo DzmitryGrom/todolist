@@ -1,0 +1,160 @@
+*:focus {
+  outline: none;
+}
+.note__btn-delete {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 10px;
+  cursor: pointer;
+}
+.note__btn-delete path {
+  fill: #f35e5e;
+}
+.note__btn-send {
+  width: 53px;
+  height: 40px;
+  font-size: 16px;
+  background: transparent;
+  border-radius: 4px;
+  -webkit-transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease;
+  cursor: pointer;
+}
+.note__btn-send:hover {
+  border-color: #333333;
+}
+.note__btn-send:disabled {
+  background-color: #c4c7cc;
+  cursor: initial;
+}
+.note__inner {
+  border-radius: 4px;
+  box-shadow: -7px 8px 16px 0 rgba(58, 70, 93, 0.07), -1px 1px 4px 0 rgba(58, 70, 93, 0.12);
+  padding: 35px 16px 10px 16px;
+  background-color: #fff;
+}
+.note__icon-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  padding: 16px;
+  cursor: pointer;
+}
+.note__icon-close [class^="icon-"],
+.note__icon-close [class*=" icon-"] {
+  font-size: 24px;
+  vertical-align: middle;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.note__icon-close [class^="icon-"] path,
+.note__icon-close [class*=" icon-"] path,
+.note__icon-close [class^="icon-"] polygon,
+.note__icon-close [class*=" icon-"] polygon {
+  -webkit-transition: fill 0.2s ease;
+  transition: fill 0.2s ease;
+  fill: #9aa5ab;
+}
+.note__icon-close [class^="icon-"]:hover path,
+.note__icon-close [class*=" icon-"]:hover path,
+.note__icon-close [class^="icon-"]:hover polygon,
+.note__icon-close [class*=" icon-"]:hover polygon {
+  fill: #333333;
+}
+.note__row {
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 2;
+}
+.note__row-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #9aa5ab;
+  margin-bottom: 6px;
+}
+.note__input,
+.note__textarea,
+.note__select {
+  display: flex;
+  font-size: 14px;
+  flex: 1 1 auto;
+  align-items: center;
+  min-height: 40px;
+  padding: 12px 8px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 400;
+  color: #556066;
+  background-color: #fff;
+  border: solid 1px #e4e5e9;
+  border-radius: 4px;
+  resize: none;
+  box-sizing: border-box;
+  -webkit-transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease;
+}
+.note__input:hover,
+.note__textarea:hover,
+.note__select:hover {
+  border-color: #333333;
+}
+.note__textarea {
+  overflow: hidden;
+  min-height: 60px;
+}
+.note__select {
+  background-image: url(../../interface/arrow_select.svg);
+  background-repeat: no-repeat;
+  background-position: 95%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.note__tooltip {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  right: 3px;
+  top: -45px;
+  z-index: 3;
+  border-radius: 4px;
+  background-color: #1f8ceb;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 400;
+  padding: 8px 10px;
+  width: 220px;
+  transition: all 0.2s ease;
+  -vendors-transition: all 0.2s ease;
+}
+.note__tooltip:before {
+  content: "";
+  right: 3px;
+  bottom: -4px;
+  height: 12px;
+  background-color: #1f8ceb;
+  width: 12px;
+  position: absolute;
+  transform: rotate(45deg);
+}
+.note__info {
+  display: inline-block;
+  position: absolute;
+  top: -5px;
+  right: -4px;
+  z-index: 2;
+  cursor: pointer;
+}
+.note__info:hover .day__tooltip {
+  opacity: 1;
+  visibility: visible;
+}

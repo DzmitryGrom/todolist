@@ -36,7 +36,7 @@
     const template = document.currentScript.ownerDocument.querySelector('template');
   appViewDayFactory.$inject = ['app.main.model.view','app.main.model.calendar', 'app.main.util.Emitter'];
   Core.module('app.main').component('app.main.component.appViewMain', appViewDayFactory);
-  function appViewDayFactory(viewModel, calendarModel) {
+  function appViewDayFactory(viewModel, calendarModel, Emitter) {
 
     class AppDay extends HTMLElement {
       constructor() {
@@ -48,7 +48,7 @@
         let name = this.getAttribute('data-name'),
             dayLabel = shadowRoot.querySelector('.day__label'),
             dayInner = shadowRoot.querySelector('.day__inner'),
-            element = new Element(),
+            element = new Emitter(),
             btnNote = shadowRoot.querySelector('.day__btn-add'),
             data = this.getAttribute('date');
 
@@ -60,9 +60,13 @@
           dayInner.innerHTML +='<app-note></app-note>';
         }
 
-        element.onChange(() => {
+//        element.onChange(() => {
+//
+//        });
 
-        });
+        function onChange() {
+
+        }
 
 
       }

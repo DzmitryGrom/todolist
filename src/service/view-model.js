@@ -7,7 +7,6 @@
     var self = this,
       mainViewNameEmitter = new Emitter(),
       mainViewName = null;
-
     self.setMainViewName = function (value) {
       mainViewName = value;
       mainViewNameEmitter.emit(value);
