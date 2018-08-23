@@ -33,7 +33,7 @@
   (() => {
     const template = document.currentScript.ownerDocument.querySelector('template');
     appViewCalendarFactory.$inject = ['app.main.model.view','app.main.model.header'];
-    Core.module('app.main').component('app.main.component.appViewMain', appViewCalendarFactory);
+    Core.module('app.main').component('app.main.component.appCalendar', appViewCalendarFactory);
 
     function appViewCalendarFactory(viewModel) {
 

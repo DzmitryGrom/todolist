@@ -1,26 +1,27 @@
 (() => {
 
-  Core.module('app.main').service('app.main.model.calendar', CalendarWeek);
+  CalendarWeekService.$inject = ['app.main.util.Emitter'];
+  Core.module('app.main').service('app.main.model.calendar', CalendarWeekService);
 
-  function CalendarWeek() {
+  function CalendarWeekService(Emitter) {
 
-      moment.locale('ru');
-      const year = 2018,
-            month = 1;
-            weeks = [],
-            todayDay = parseInt(moment().format('DMY')),
-            yesterDay = parseInt(moment().subtract(1, 'day').format('DMY')),
-            currentDate = moment([year, month - 1]),
-            startDay = currentDate.clone().startOf('month').startOf('week'),
-            endDay = currentDate.clone().endOf('month').endOf('week'),
-            date = startDay.clone().subtract(1, 'day');
+    moment.locale('ru');
+    const year = 2018,
+          month = 1;
+          weeks = [],
+          todayDay = parseInt(moment().format('DMY')),
+          yesterDay = parseInt(moment().subtract(1, 'day').format('DMY')),
+          currentDate = moment([year, month - 1]),
+          startDay = currentDate.clone().startOf('month').startOf('week'),
+          endDay = currentDate.clone().endOf('month').endOf('week'),
+          date = startDay.clone().subtract(1, 'day');
 
     while (date.isBefore(endDay, 'day')) {
 
       weeks.push(Array(7).fill(0).map(() => {
-        const d = date.add(1, 'day').clone();
-        const isYesterday = parseInt(d.format('DMY')) === yesterDay;
-        const isTodayDay = parseInt(d.format('DMY')) === todayDay;
+        const d = date.add(1, 'day').clone(),
+              isYesterday = parseInt(d.format('DMY')) === yesterDay,
+              isTodayDay = parseInt(d.format('DMY')) === todayDay;
 
         return {
           dayName: d.format('dddd'),

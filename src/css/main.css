@@ -17,3 +17,7 @@ body {
   overflow-x: hidden;
 }
 
+app-note {
+  background: red;
+}
+

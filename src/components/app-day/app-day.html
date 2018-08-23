@@ -17,7 +17,6 @@
   </style>
   <label class="day__label"></label>
   <div class="day__inner">
-
     <span class="day__btn-add">
       <i class="icon-add">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -34,45 +33,45 @@
 <script>
   (() => {
     const template = document.currentScript.ownerDocument.querySelector('template');
-  appViewDayFactory.$inject = ['app.main.model.view','app.main.model.calendar', 'app.main.util.Emitter'];
-  Core.module('app.main').component('app.main.component.appViewMain', appViewDayFactory);
-  function appViewDayFactory(viewModel, calendarModel, Emitter) {
+    appViewDayFactory.$inject = ['app.main.model.view', 'app.main.util.Emitter', 'app.main.component.appNote'];
+    Core.module('app.main').component('app.main.component.appDay', appViewDayFactory);
+    function appViewDayFactory(viewModel, Emitter) {
 
-    class AppDay extends HTMLElement {
-      constructor() {
-        super();
-        const shadowRoot = this.attachShadow({mode: 'open'});
-        this.rootElement = template.content.cloneNode(true);
-        this.shadowRoot.appendChild(this.rootElement);
+      class AppDay extends HTMLElement {
+        constructor(data) {
 
-        let name = this.getAttribute('data-name'),
-            dayLabel = shadowRoot.querySelector('.day__label'),
-            dayInner = shadowRoot.querySelector('.day__inner'),
-            element = new Emitter(),
-            btnNote = shadowRoot.querySelector('.day__btn-add'),
-            data = this.getAttribute('date');
+          super();
+          const shadowRoot = this.attachShadow({mode: 'open'});
+          this.rootElement = template.content.cloneNode(true);
+          this.shadowRoot.appendChild(this.rootElement);
+          let dayInner = shadowRoot.querySelector('.day__inner'),
+              label =  shadowRoot.querySelector('.day__label'),
+              elemNote = document.createElement("app-note"),
+              element = new Emitter();
 
-        dayLabel.innerHTML = `<span class="day__label-name">${name}, </span>${data}`;
+          label.innerText = `${data.dayName}, ${data.date}`;
 
-        btnNote.addEventListener('click', openNote);
 
-        function openNote() {
-          dayInner.innerHTML +='<app-note></app-note>';
+          shadowRoot.addEventListener('click', (event) => {
+            let target = event.target;
+
+            if(target.tagName === 'SPAN') {
+
+              dayInner.appendChild(elemNote);
+            }
+
+          }, false);
+
+          viewModel.subscribeMainViewName(name => {
+
+            let appNote = shadowRoot.querySelector('app-note');
+            //dayInner.childElementCount.remove();
+          }, true);
+
         }
-
-//        element.onChange(() => {
-//
-//        });
-
-        function onChange() {
-
-        }
-
-
       }
+      customElements.define('app-day', AppDay);
+      return AppDay;
     }
-    customElements.define('app-day', AppDay);
-    return AppDay;
-  }
   })();
 </script>

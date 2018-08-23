@@ -7,14 +7,15 @@
       height: 100%;
     }
   </style>
+  <div class="container"></div>
 </template>
 
 <script>
   (() => {
     const template = document.currentScript.ownerDocument.querySelector('template');
-    appViewMonthFactory.$inject = ['app.main.model.view','app.main.model.calendar'];
-    Core.module('app.main').component('app.main.component.appViewMain', appViewMonthFactory);
-    function appViewMonthFactory(viewModel, calendarModel) {
+    appViewMonthFactory.$inject = ['app.main.model.calendar', 'app.main.component.appWeek'];
+    Core.module('app.main').component('app.main.component.appMonth', appViewMonthFactory);
+    function appViewMonthFactory(calendarModelService, AppWeek) {
 
       class AppMonth extends HTMLElement {
         constructor() {
@@ -24,10 +25,11 @@
 
           this.shadowRoot.appendChild(this.rootElement);
 
-          for (let i = 0; i < calendarModel.length; i++) {
-            const daysOfWeek = calendarModel[i].length;
-            shadowRoot.innerHTML += '<app-week data-id="' + i + '"></app-week>';
-          }
+          const container = shadowRoot.querySelector('.container');
+
+          let weeks = calendarModelService.map(week => new AppWeek(week));
+
+          weeks.forEach(week => container.appendChild(week));
 
         }
 
