@@ -1,0 +1,42 @@
+*:focus {
+  outline: none;
+}
+.note-view__inner {
+  position: relative;
+  z-index: 1;
+  display: block;
+  border-radius: 4px;
+  box-shadow: -7px 8px 16px 0 rgba(58, 70, 93, 0.07), -1px 1px 4px 0 rgba(58, 70, 93, 0.12);
+  padding: 10px 16px;
+  background-color: #fff;
+}
+.note-view__body {
+  max-height: 272px;
+  overflow: hidden;
+}
+.note-view__header {
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.note-view__category,
+.note-view__content,
+.note-view__status {
+  margin: 0;
+}
+.note-view__category {
+  font-size: 12px;
+  color: #c4c7cc;
+  max-height: 30px;
+  overflow: hidden;
+}
+.note-view__content {
+  font-size: 14px;
+  color: #9aa5ab;
+}
+.note-view__status {
+  font-size: 10px;
+  color: #f35e5e;
+  display: inline-block;
+}

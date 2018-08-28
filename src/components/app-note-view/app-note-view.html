@@ -1,0 +1,72 @@
+<template>
+  <style>
+    :host {
+      cursor: pointer;
+      display: block;
+      margin-bottom: 8px;
+    }
+  </style>
+  <link rel="stylesheet" href="/components/app-note-view/app-note-view.css">
+  <div class="note-view__inner">
+    <div class="note-view__header">
+      <p class="note-view__category"></p>
+      <p class="note-view__status">Статус</p>
+    </div>
+    <div class="note-view__body">
+      <p class="note-view__content">Тест</p>
+    </div>
+  </div>
+</template>
+
+<script>
+  (() => {
+    const template = document.currentScript.ownerDocument.querySelector('template');
+    appNoteViewFactory.$inject = [];
+    Core.module('app.main').component('app.main.component.appNoteView', appNoteViewFactory);
+
+    function appNoteViewFactory() {
+
+      class AppNoteView extends HTMLElement {
+
+        constructor(item) {
+
+          super();
+          const shadowRoot = this.attachShadow({mode: 'open'});
+          this.item = item;
+
+          this.rootElement = template.content.cloneNode(true);
+          this.shadowRoot.appendChild(this.rootElement);
+
+          this.category = shadowRoot.querySelector('.note-view__category');
+          this.content = shadowRoot.querySelector('.note-view__content');
+          this.header = shadowRoot.querySelector('.note-view__header');
+          this.status = shadowRoot.querySelector('.note-view__status');
+
+
+          this.category.innerText = `${item.category}`;
+          this.content.innerText = `${item.content}`;
+          this.status.innerText = `${item.status}`;
+
+          /*  event for component */
+          this.addEventListener('click', event => {
+            /* custom event for open note */
+            var event = new CustomEvent("changeNote", {
+              bubbles: true,
+              detail: {
+                data: this.item
+              }
+            });
+            this.dispatchEvent(event);
+            /* end */
+
+          })
+          /* end */
+        }
+
+      }
+      customElements.define('app-note-view', AppNoteView);
+      return AppNoteView;
+    }
+  })();
+</script>
+

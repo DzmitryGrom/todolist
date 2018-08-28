@@ -20,6 +20,10 @@ gulp.task('compile-less', function() {
   gulp.src('./src/components/app-note/app-note.less')
     .pipe(less())
     .pipe(gulp.dest('./src/components/app-note/'));
+
+  gulp.src('./src/components/app-note-view/app-note-view.less')
+    .pipe(less())
+    .pipe(gulp.dest('./src/components/app-note-view/'));
 });
 
 /* Task to watch less changes */

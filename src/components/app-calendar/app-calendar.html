@@ -26,16 +26,16 @@
       }
     }
   </style>
-  <app-month></app-month>
+  <div class="container"></div>
 </template>
 
 <script>
   (() => {
     const template = document.currentScript.ownerDocument.querySelector('template');
-    appViewCalendarFactory.$inject = ['app.main.model.view','app.main.model.header'];
+    appViewCalendarFactory.$inject = ['app.main.model.view', 'app.main.component.appMonth'];
     Core.module('app.main').component('app.main.component.appCalendar', appViewCalendarFactory);
 
-    function appViewCalendarFactory(viewModel) {
+    function appViewCalendarFactory(viewModel, AppMonth) {
 
       class AppCalendar extends HTMLElement {
         constructor() {
@@ -44,6 +44,8 @@
           this.rootElement = template.content.cloneNode(true);
           this.shadowRoot.appendChild(this.rootElement);
 
+          const container = shadowRoot.querySelector('.container');
+          container.appendChild(new AppMonth());
         }
       }
       customElements.define('app-calendar', AppCalendar);

@@ -1,6 +1,5 @@
-<template id="appDay">
+<template>
   <style>
-    @import "/components/app-day/app-day.css";
     :host {
       position: relative;
       width: 330px;
@@ -15,9 +14,12 @@
       }
     }
   </style>
-  <label class="day__label"></label>
-  <div class="day__inner">
-    <span class="day__btn-add">
+  <link rel="stylesheet" href="/components/app-day/app-day.css">
+    <label class="day__label"></label>
+    <div class="day__inner">
+      <div class="day__note-container">
+      </div>
+      <span class="day__btn-add">
       <i class="icon-add">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <path fill="#9AA5AB"
@@ -27,15 +29,15 @@
       </i>
       <span class="day__btn-add-text">Добавить заметку</span>
     </span>
-  </div>
-</template>
+    </div>
 
+</template>
 <script>
   (() => {
     const template = document.currentScript.ownerDocument.querySelector('template');
-    appViewDayFactory.$inject = ['app.main.model.view', 'app.main.util.Emitter', 'app.main.component.appNote'];
+    appViewDayFactory.$inject = ['app.main.model.view', 'app.main.util.Emitter', 'app.main.component.appNote', 'app.main.component.appNoteView'];
     Core.module('app.main').component('app.main.component.appDay', appViewDayFactory);
-    function appViewDayFactory(viewModel, Emitter) {
+    function appViewDayFactory(viewModel,  Emitter, AppNote, AppNoteView) {
 
       class AppDay extends HTMLElement {
         constructor(data) {
@@ -44,32 +46,85 @@
           const shadowRoot = this.attachShadow({mode: 'open'});
           this.rootElement = template.content.cloneNode(true);
           this.shadowRoot.appendChild(this.rootElement);
-          let dayInner = shadowRoot.querySelector('.day__inner'),
-              label =  shadowRoot.querySelector('.day__label'),
-              elemNote = document.createElement("app-note"),
-              element = new Emitter();
+          this.noteContainer = shadowRoot.querySelector('.day__note-container');
+          this.element = new Emitter();
+          this.noteViewVal = '';
+          this.data = data;
+
+          let label =  shadowRoot.querySelector('.day__label');
 
           label.innerText = `${data.dayName}, ${data.date}`;
 
-
-          shadowRoot.addEventListener('click', (event) => {
+          /* events for component */
+          shadowRoot.addEventListener('click', event => {
             let target = event.target;
 
             if(target.tagName === 'SPAN') {
-
-              dayInner.appendChild(elemNote);
+              this.createNote();
             }
 
           }, false);
+          /* end */
 
-          viewModel.subscribeMainViewName(name => {
+          /* render note-view */
+          this.render();
+          /* end */
 
-            let appNote = shadowRoot.querySelector('app-note');
-            //dayInner.childElementCount.remove();
-          }, true);
+          /*events for component*/
+          shadowRoot.addEventListener("changeNote",event => {
+            this.noteViewVal = event.detail.data;
+            this.editNote(this.noteViewVal);
+          });
+          /* end */
 
         }
+
+        /* method create note */
+        createNote() {
+          let el = new AppNote(this.data);
+
+          el.subscribeNoteChange(value => { this.render(); })
+
+          this.noteContainer.appendChild(el);
+        }
+        /* end */
+
+        /* method edit note */
+        editNote(noteViewVal) {
+          let el = new AppNote(noteViewVal);
+
+          el.subscribeNoteChange(value => { this.render(); })
+
+
+          this.noteContainer.appendChild(el);
+        }
+        /* end */
+
+        /* method render note */
+        render() {
+
+          this.noteContainer.innerHTML = '';
+
+          let storageArr = null,
+              calendarKey = [this.data.year, this.data.month, this.data.day].join('-');
+
+          storageArr = localStorage.getItem('calendar');
+          storageArr = storageArr ? JSON.parse(storageArr) : {};
+
+          if(storageArr[calendarKey]) {
+            storageArr[calendarKey].forEach((item, i) => {
+              item.ind = i;
+              item.day = this.data.day;
+              item.month = this.data.month;
+              item.year = this.data.year;
+              this.noteContainer.appendChild(new AppNoteView(item));
+            })
+          }
+
+        }
+        /* end */
       }
+
       customElements.define('app-day', AppDay);
       return AppDay;
     }

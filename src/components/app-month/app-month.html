@@ -1,4 +1,4 @@
-<template id="appMonth">
+<template>
   <style>
     :host {
       display: block;
@@ -27,7 +27,8 @@
 
           const container = shadowRoot.querySelector('.container');
 
-          let weeks = calendarModelService.map(week => new AppWeek(week));
+//          let weeks = calendarModelService.map(week => new AppWeek(week));
+          let weeks = calendarModelService.getCurrentMonthWeeks().map(week => new AppWeek(week))
 
           weeks.forEach(week => container.appendChild(week));
 

@@ -2,6 +2,14 @@
 @import "../../less/varibles";
 .note {
   &__btn {
+    &-delete, &-close {
+      position: relative;
+      z-index: 1;
+      svg {
+        position: relative;
+        z-index: -10;
+      }
+    }
     &-delete {
       display: inline-block;
       vertical-align: middle;
@@ -9,6 +17,18 @@
       cursor: pointer;
       path {
         fill: @color-red;
+      }
+    }
+    &-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 5;
+      padding: 16px;
+      cursor: pointer;
+      .icon-prop();
+      path {
+        fill: @color-black;
       }
     }
     &-send {
@@ -29,24 +49,10 @@
     }
   }
   &__inner {
+    display: block;
     .item-prop();
     padding: 35px 16px 10px 16px;
     background-color: @color-white;
-  }
-  &__icon {
-    &-close {
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 5;
-      padding: 16px;
-      cursor: pointer;
-      svg {
-        position: relative;
-        z-index: -1;
-      }
-      .icon-prop();
-    }
   }
   &__row {
     margin-bottom: 18px;

@@ -7,6 +7,7 @@
     var self = this,
       mainViewNameEmitter = new Emitter(),
       mainViewName = null;
+
     self.setMainViewName = function (value) {
       mainViewName = value;
       mainViewNameEmitter.emit(value);
@@ -14,7 +15,7 @@
 
     self.getMainViewName = function () {
       return mainViewName;
-    }
+    };
 
     self.subscribeMainViewName = function (callback, immediateCall) {
       mainViewNameEmitter.subscribe(callback, immediateCall);

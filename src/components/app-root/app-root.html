@@ -1,4 +1,4 @@
-<template id="appRoot">
+<template>
   <style>
     @import "/components/app-root/app-root.css";
     :host {
@@ -9,25 +9,36 @@
     }
   </style>
   <app-header></app-header>
-  <app-calendar></app-calendar>
 </template>
 
 <script>
   (() => {
     const template = document.currentScript.ownerDocument.querySelector('template');
-  AppRootFactory.$inject = [];
+  AppRootFactory.$inject = ['app.main.model.view', 'app.main.component.appCalendar'];
   Core.module('app.main').component('app.main.component.appRoot', AppRootFactory);
-  function AppRootFactory() {
+  function AppRootFactory(viewModel, AppCalendar) {
     class AppRoot extends HTMLElement {
       constructor() {
         super();
         this.shadow = this.attachShadow({mode: 'open'});
         this.rootElement = template.content.cloneNode(true);
         this.shadow.appendChild(this.rootElement);
+        this.renderCalendar();
+      }
+
+      renderCalendar() {
+        const container = this.shadow.querySelector('app-calendar');
+        window.scrollTo(0, 0);
+        if(container) {
+          setTimeout(() => {
+            this.shadow.querySelector('app-calendar').remove();
+          }, 150);
+        }
+        this.shadow.appendChild(new AppCalendar());
       }
     }
     customElements.define('app-root', AppRoot);
-    return AppRoot;
+    return new AppRoot();
   }
   })();
 </script>

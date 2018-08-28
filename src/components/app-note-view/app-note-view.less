@@ -1,0 +1,43 @@
+@import "../../less/mixins";
+@import "../../less/varibles";
+.note-view {
+  &__inner {
+    position: relative;
+    z-index: 1;
+    display: block;
+    .item-prop();
+    padding: 10px 16px;
+    background-color: @color-white;
+  }
+  &__body {
+    max-height: 272px;
+    overflow: hidden;
+  }
+  &__header {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  &__category,
+  &__content,
+  &__status {
+    margin: 0;
+  }
+  &__category {
+    font-size: 12px;
+    color: @color-default-gray;
+    max-height: 30px;
+    overflow: hidden;
+  }
+  &__content {
+    font-size: 14px;
+    color: @color-gray;
+
+  }
+  &__status {
+    font-size: 10px;
+    color: @color-red;
+    display: inline-block;
+  }
+}

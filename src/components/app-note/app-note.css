@@ -1,6 +1,16 @@
 *:focus {
   outline: none;
 }
+.note__btn-delete,
+.note__btn-close {
+  position: relative;
+  z-index: 1;
+}
+.note__btn-delete svg,
+.note__btn-close svg {
+  position: relative;
+  z-index: -10;
+}
 .note__btn-delete {
   display: inline-block;
   vertical-align: middle;
@@ -9,6 +19,41 @@
 }
 .note__btn-delete path {
   fill: #f35e5e;
+}
+.note__btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 5;
+  padding: 16px;
+  cursor: pointer;
+}
+.note__btn-close [class^="icon-"],
+.note__btn-close [class*=" icon-"] {
+  font-size: 24px;
+  vertical-align: middle;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.note__btn-close [class^="icon-"] path,
+.note__btn-close [class*=" icon-"] path,
+.note__btn-close [class^="icon-"] polygon,
+.note__btn-close [class*=" icon-"] polygon {
+  -webkit-transition: fill 0.2s ease;
+  transition: fill 0.2s ease;
+  fill: #9aa5ab;
+}
+.note__btn-close [class^="icon-"]:hover path,
+.note__btn-close [class*=" icon-"]:hover path,
+.note__btn-close [class^="icon-"]:hover polygon,
+.note__btn-close [class*=" icon-"]:hover polygon {
+  fill: #333333;
+}
+.note__btn-close path {
+  fill: #333333;
 }
 .note__btn-send {
   width: 53px;
@@ -28,46 +73,11 @@
   cursor: initial;
 }
 .note__inner {
+  display: block;
   border-radius: 4px;
   box-shadow: -7px 8px 16px 0 rgba(58, 70, 93, 0.07), -1px 1px 4px 0 rgba(58, 70, 93, 0.12);
   padding: 35px 16px 10px 16px;
   background-color: #fff;
-}
-.note__icon-close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 5;
-  padding: 16px;
-  cursor: pointer;
-}
-.note__icon-close svg {
-  position: relative;
-  z-index: -1;
-}
-.note__icon-close [class^="icon-"],
-.note__icon-close [class*=" icon-"] {
-  font-size: 24px;
-  vertical-align: middle;
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  line-height: 1;
-  cursor: pointer;
-}
-.note__icon-close [class^="icon-"] path,
-.note__icon-close [class*=" icon-"] path,
-.note__icon-close [class^="icon-"] polygon,
-.note__icon-close [class*=" icon-"] polygon {
-  -webkit-transition: fill 0.2s ease;
-  transition: fill 0.2s ease;
-  fill: #9aa5ab;
-}
-.note__icon-close [class^="icon-"]:hover path,
-.note__icon-close [class*=" icon-"]:hover path,
-.note__icon-close [class^="icon-"]:hover polygon,
-.note__icon-close [class*=" icon-"]:hover polygon {
-  fill: #333333;
 }
 .note__row {
   margin-bottom: 18px;
