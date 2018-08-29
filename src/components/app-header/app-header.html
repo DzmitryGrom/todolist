@@ -23,19 +23,19 @@
                   transform="translate(5 5)"/>
           </svg>
         </i>
-        <span class="header__item" tabindex="0">Янв</span>
-        <span class="header__item" tabindex="1">Фев</span>
-        <span class="header__item" tabindex="2">Март</span>
-        <span class="header__item" tabindex="3">Апр</span>
-        <span class="header__item" tabindex="4">Май</span>
-        <span class="header__item" tabindex="5">Июнь</span>
-        <span class="header__item" tabindex="6">Июль</span>
-        <span class="header__item" tabindex="7">Авг</span>
-        <span class="header__item" tabindex="8">Сен</span>
-        <span class="header__item" tabindex="9">Окт</span>
-        <span class="header__item" tabindex="10">Нояб</span>
-        <span class="header__item" tabindex="11">Дек</span>
-        <div style="width: 54.91px; left: 0px" class="header__item-active"></div>
+        <span class="header__item" tabindex="0">янв</span>
+        <span class="header__item" tabindex="1">фев</span>
+        <span class="header__item" tabindex="2">март</span>
+        <span class="header__item" tabindex="3">апр</span>
+        <span class="header__item" tabindex="4">май</span>
+        <span class="header__item" tabindex="5">июнь</span>
+        <span class="header__item" tabindex="6">июль</span>
+        <span class="header__item" tabindex="7">авг</span>
+        <span class="header__item" tabindex="8">сен</span>
+        <span class="header__item" tabindex="9">окт</span>
+        <span class="header__item" tabindex="10">нояб</span>
+        <span class="header__item" tabindex="11">дек</span>
+        <div class="header__item-active"></div>
       </div>
       <span class="header__icon-burger icon-burger">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -62,17 +62,27 @@
 
           this.shadowRoot.appendChild(this.rootElement);
 
+
+
           const menuActiveSolid = shadowRoot.querySelector('.header__item-active'),
                 menuList = shadowRoot.querySelector('.header__list'),
+                menuItem = shadowRoot.querySelectorAll('.header__item'),
                 headerDate = shadowRoot.querySelector('.header__today'),
                 burger = shadowRoot.querySelector('#burger'),
                 now = moment(),
-                day = now.format('dddd, DD MMMM');
+                day = now.format('dddd, DD MMMM'),
+                curDate = now.format('M') -1;
 
-          let isOpen = false;
+          menuItem[curDate].classList.add('header__item_active');
 
+          let active = shadowRoot.querySelector('.header__item_active'),
+              isOpen = false;
 
           headerDate.innerHTML = `<p class="header__today-name">сегодня</p> <p class="header__today-date" day="${day}">${day}</p>`;
+
+          calendarModelService.setCurrentMonth(curDate);
+          AppRoot.renderCalendar();
+
           shadowRoot.addEventListener("click", event => {
             const currentElement = event.target;
             if (currentElement.parentNode.classList.contains('icon-burger')) {
@@ -96,8 +106,15 @@
             }
           });
 
+          window.onload = function() {
+            menuActiveSolid.style.width = active.offsetWidth + 'px';
+            menuActiveSolid.style.left = active.offsetLeft + 'px';
+          };
+
         }
+
       }
+
       customElements.define('app-header', AppHeader);
 
       return AppHeader;

@@ -75,6 +75,7 @@
   padding: 26px 12px;
   text-decoration: none;
   cursor: pointer;
+  text-transform: capitalize;
 }
 @media all and (max-width: 920px) {
   .header__item {

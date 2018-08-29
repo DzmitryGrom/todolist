@@ -4,14 +4,14 @@
   Core.module('app.main').service('app.main.model.calendar', calendarFactory);
   function calendarFactory() {
 
-  // CalendarWeekService.$inject = ['app.main.util.Emitter'];
-  // Core.module('app.main').service('app.main.model.calendar', Calendar);
 
   class Calendar {
 
     constructor(data) {
-      this.year = data.year || 2018;
-      this.month = data.month || 1;
+      this.now = moment();
+      this.curDate = this.now.format('M');
+      this.year = 2018;
+      this.month =  this.curDate;
       this.weeks = [];
 
       this.currentDate = moment([this.year, this.month - 1]);
@@ -29,8 +29,8 @@
     getCurrentMonthWeeks() {
       const weeks = [],
             currentDate = this.getCurrentDate(),
-            todayDay = parseInt(moment().format('DMY')),
-            yesterDay = parseInt(moment().subtract(1, 'day').format('DMY')),
+            todayDay = parseInt(this.now.format('DMY')),
+            yesterDay = parseInt(this.now.subtract(1, 'day').format('DMY')),
             startDay = currentDate.clone().startOf('month').startOf('week'),
             endDay = currentDate.clone().endOf('month').endOf('week'),
             date = startDay.clone().subtract(1, 'day');
@@ -60,7 +60,7 @@
       return weeks;
     }
   }
-    return new Calendar({year: 2018, month: 1});
+    return new Calendar;
   }
 
 })();
