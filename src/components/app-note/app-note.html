@@ -73,8 +73,18 @@
           this.date = date;
           this.calendarKey = [this.date.year, this.date.month, this.date.day].join('-');
 
+
+          /* varibles */
           let editor = shadowRoot.querySelector('textarea'),
-              form = shadowRoot.querySelector('form');
+              form = shadowRoot.querySelector('form'),
+              btnDelete = shadowRoot.querySelector('.note__btn-delete'),
+              submitButton = shadowRoot.querySelector('button');
+          /* end */
+
+          /* set property for buttons */
+          btnDelete.style.display = 'none';
+          submitButton.setAttribute('disabled', '');
+          /* end */
 
           this.emitterChange = new Emitter();
 
@@ -90,15 +100,18 @@
           }
           /* end */
 
-          /* detected index note-view and set data to inputs  */
+          /* detecting index note-view and set data to inputs  */
           if(this.dateIndex || this.dateIndex === 0) {
 
+            btnDelete.style.display = '';
+
             this.storage = this.storage ? JSON.parse(this.storage) : {};
+
+            submitButton.removeAttribute('disabled', '');
 
             if(this.storage[this.calendarKey]) {
 
               let obj = this.storage[this.calendarKey][this.dateIndex];
-
 
               form.elements.content.value = obj.content;
               form.elements.category.value = obj.category;
@@ -109,6 +122,16 @@
           }
           /* end */
 
+
+          form.addEventListener('input', event => {
+
+            if(form.elements.content.value !== '' || form.elements.category.value !== '' ) {
+              submitButton.removeAttribute('disabled', '');
+            } else {
+              submitButton.setAttribute('disabled', '');
+            }
+
+          })
           /* event submit on form */
           form.addEventListener('submit', event => {
 
@@ -125,7 +148,7 @@
               }
             }
 
-            /* detected index note, if undefined - create new, if !== undefined - edit this */
+            /* detecting index note, if undefined - create new, if !== undefined - edit this */
             if(this.dateIndex === undefined) {
 
               let arrProp = [];
@@ -163,20 +186,21 @@
           /* end */
 
           /* events clicks on others buttons */
-          form.addEventListener('click', (event) => {
+          shadowRoot.addEventListener('click', (event) => {
             let target = event.target;
-              if(target.classList.contains('note__btn-close')) {
+
+            if(target.classList.contains('note__btn-close')) {
                 this.remove();
               }
-              if(target.classList.contains('note__btn-delete')) {
+            if(target.classList.contains('note__btn-delete')) {
 
-                this.removeItemStorage();
+              this.removeItemStorage();
 
+              this.emitterChange.emit();
 
-                this.emitterChange.emit();
+              this.remove();
 
-                this.remove();
-              }
+            }
           });
           /* end */
 
@@ -203,7 +227,6 @@
         subscribeNoteChange(callback, immediateCall) {
           this.emitterChange.subscribe(callback, immediateCall);
         }
-
 
       }
       customElements.define('app-note', AppNote);

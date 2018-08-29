@@ -42,9 +42,12 @@
       &:hover {
         border-color: @color-black;
       }
-      &:disabled {
+      &:disabled, &disabled:hover  {
         background-color: @color-default-gray;
+        color: @color-white;
+        border-color: @color-default-gray;
         cursor: initial;
+
       }
     }
   }

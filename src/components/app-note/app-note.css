@@ -68,8 +68,11 @@
 .note__btn-send:hover {
   border-color: #333333;
 }
-.note__btn-send:disabled {
+.note__btn-send:disabled,
+.note__btn-senddisabled:hover {
   background-color: #c4c7cc;
+  color: #fff;
+  border-color: #c4c7cc;
   cursor: initial;
 }
 .note__inner {

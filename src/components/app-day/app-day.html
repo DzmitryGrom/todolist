@@ -61,6 +61,7 @@
 
             if(target.tagName === 'SPAN') {
               this.createNote();
+
             }
 
           }, false);
@@ -78,20 +79,41 @@
           /* end */
 
         }
+        /* method create note */
+        clickOutSide(el) {
+
+          setTimeout(() => {
+            document.addEventListener('click', event => {
+
+              if(el && !event.target.closest('app-note')) {
+                el.remove();
+              }
+
+            }, false);
+
+          } ,0)
+
+        }
+        /* end */
 
         /* method create note */
         createNote() {
           let el = new AppNote(this.data);
 
+          this.clickOutSide(el);
+
           el.subscribeNoteChange(value => { this.render(); })
 
           this.noteContainer.appendChild(el);
+
         }
         /* end */
 
         /* method edit note */
         editNote(noteViewVal) {
           let el = new AppNote(noteViewVal);
+
+          this.clickOutSide(el);
 
           el.subscribeNoteChange(value => { this.render(); })
 
