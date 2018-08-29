@@ -4,7 +4,6 @@
       display: block;
       width: 100%;
       min-height: 100%;
-      height: 100%;
       max-width: 1085px;
       margin: 0 auto;
       padding-top: 90px;
@@ -46,6 +45,7 @@
 
           const container = shadowRoot.querySelector('.container');
           container.appendChild(new AppMonth());
+
         }
       }
       customElements.define('app-calendar', AppCalendar);

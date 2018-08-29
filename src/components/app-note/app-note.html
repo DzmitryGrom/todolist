@@ -13,6 +13,7 @@
   </style>
   <link rel="stylesheet" href="/components/app-note/app-note.css">
   <div class="note__inner">
+    <div class="note__shadow"></div>
     <form>
       <span class="note__btn-close">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -61,6 +62,7 @@
     Core.module('app.main').component('app.main.component.appNote', appNoteFactory);
     function appNoteFactory(viewModel,  Emitter) {
 
+
       class AppNote extends HTMLElement {
 
         constructor(date) {
@@ -72,7 +74,9 @@
           this.dateIndex =  date.ind;
           this.date = date;
           this.calendarKey = [this.date.year, this.date.month, this.date.day].join('-');
+          this.container = shadowRoot.querySelector('.note__inner');
 
+          this.closeOutSide(event);
 
           /* varibles */
           let editor = shadowRoot.querySelector('textarea'),
@@ -99,6 +103,7 @@
             },0);
           }
           /* end */
+
 
           /* detecting index note-view and set data to inputs  */
           if(this.dateIndex || this.dateIndex === 0) {
@@ -191,6 +196,7 @@
 
             if(target.classList.contains('note__btn-close')) {
                 this.remove();
+                this.emitterChange.emit();
               }
             if(target.classList.contains('note__btn-delete')) {
 
@@ -226,6 +232,17 @@
         /* method subscribeNoteChange */
         subscribeNoteChange(callback, immediateCall) {
           this.emitterChange.subscribe(callback, immediateCall);
+        }
+        /* end */
+        closeOutSide(event){
+          this.container.addEventListener("click", event => {
+            if(event.target.classList.contains('note__shadow')) {
+              console.log(event.target);
+              this.emitterChange.emit();
+              this.remove();
+            }
+          })
+
         }
 
       }

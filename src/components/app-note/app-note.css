@@ -75,12 +75,22 @@
   border-color: #c4c7cc;
   cursor: initial;
 }
+.note__shadow {
+  position: fixed;
+  background-color: #333333;
+  opacity: 0.7;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
 .note__inner {
   display: block;
-  border-radius: 4px;
-  box-shadow: -7px 8px 16px 0 rgba(58, 70, 93, 0.07), -1px 1px 4px 0 rgba(58, 70, 93, 0.12);
   padding: 35px 16px 10px 16px;
+  border-radius: 4px;
   background-color: #fff;
+  box-shadow: -7px 8px 16px 0 rgba(58, 70, 93, 0.07), -1px 1px 4px 0 rgba(58, 70, 93, 0.12);
 }
 .note__row {
   margin-bottom: 18px;

@@ -1,7 +1,6 @@
 <template>
   <style>
     :host {
-      position: relative;
       width: 330px;
       flex-shrink: 0;
       display: block;
@@ -45,11 +44,14 @@
           super();
           const shadowRoot = this.attachShadow({mode: 'open'});
           this.rootElement = template.content.cloneNode(true);
-          this.shadowRoot.appendChild(this.rootElement);
+          shadowRoot.appendChild(this.rootElement);
           this.noteContainer = shadowRoot.querySelector('.day__note-container');
+          this.noteInner = shadowRoot.querySelector('.day__inner');
           this.element = new Emitter();
           this.noteViewVal = '';
           this.data = data;
+          this.body = document.querySelector('body');
+          this.noteInner.style.zIndex = '';
 
           let label =  shadowRoot.querySelector('.day__label');
 
@@ -61,7 +63,6 @@
 
             if(target.tagName === 'SPAN') {
               this.createNote();
-
             }
 
           }, false);
@@ -75,24 +76,24 @@
           shadowRoot.addEventListener("changeNote",event => {
             this.noteViewVal = event.detail.data;
             this.editNote(this.noteViewVal);
+            this.setStyle();
           });
           /* end */
 
         }
         /* method create note */
-        clickOutSide(el) {
 
-          setTimeout(() => {
-            document.addEventListener('click', event => {
+        /* set style for body */
+        setStyle(){
+          this.body.style.overflow = 'hidden';
+          this.noteInner.style.zIndex = '6';
+        }
+        /* end */
 
-              if(el && !event.target.closest('app-note')) {
-                el.remove();
-              }
-
-            }, false);
-
-          } ,0)
-
+        /* remove style for body */
+        removeStyle(){
+          this.body.style.overflow = '';
+          this.noteInner.style.zIndex = '';
         }
         /* end */
 
@@ -100,9 +101,12 @@
         createNote() {
           let el = new AppNote(this.data);
 
-          this.clickOutSide(el);
+          this.setStyle();
 
-          el.subscribeNoteChange(value => { this.render(); })
+          el.subscribeNoteChange(value => {
+            this.render();
+            this.removeStyle();
+          })
 
           this.noteContainer.appendChild(el);
 
@@ -113,12 +117,14 @@
         editNote(noteViewVal) {
           let el = new AppNote(noteViewVal);
 
-          this.clickOutSide(el);
-
-          el.subscribeNoteChange(value => { this.render(); })
-
+          el.subscribeNoteChange(value => {
+            this.render();
+            this.removeStyle();
+          })
 
           this.noteContainer.appendChild(el);
+
+          this.setStyle();
         }
         /* end */
 
@@ -145,6 +151,7 @@
 
         }
         /* end */
+
       }
 
       customElements.define('app-day', AppDay);
