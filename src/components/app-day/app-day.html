@@ -34,9 +34,9 @@
 <script>
   (() => {
     const template = document.currentScript.ownerDocument.querySelector('template');
-    appViewDayFactory.$inject = ['app.main.model.view', 'app.main.util.Emitter', 'app.main.component.appNote', 'app.main.component.appNoteView'];
+    appViewDayFactory.$inject = ['app.main.model.view', 'app.main.component.appNote', 'app.main.component.appNoteView'];
     Core.module('app.main').component('app.main.component.appDay', appViewDayFactory);
-    function appViewDayFactory(viewModel,  Emitter, AppNote, AppNoteView) {
+    function appViewDayFactory(viewModel, AppNote, AppNoteView) {
 
       class AppDay extends HTMLElement {
         constructor(data) {
@@ -47,7 +47,6 @@
           shadowRoot.appendChild(this.rootElement);
           this.noteContainer = shadowRoot.querySelector('.day__note-container');
           this.noteInner = shadowRoot.querySelector('.day__inner');
-          this.element = new Emitter();
           this.noteViewVal = '';
           this.data = data;
           this.body = document.querySelector('body');
@@ -72,7 +71,7 @@
           this.render();
           /* end */
 
-          /*events for component*/
+          /*event for app-note*/
           shadowRoot.addEventListener("changeNote",event => {
             this.noteViewVal = event.detail.data;
             this.editNote(this.noteViewVal);
@@ -140,6 +139,11 @@
           storageArr = storageArr ? JSON.parse(storageArr) : {};
 
           if(storageArr[calendarKey]) {
+
+            /*viewModel for app-calendar*/
+            viewModel.setMainViewName();
+            /* end */
+
             storageArr[calendarKey].forEach((item, i) => {
               item.ind = i;
               item.day = this.data.day;
@@ -151,6 +155,7 @@
 
         }
         /* end */
+
 
       }
 

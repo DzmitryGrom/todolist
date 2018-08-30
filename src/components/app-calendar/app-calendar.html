@@ -24,17 +24,48 @@
         width: 100%;
       }
     }
+    .calendar__btn:hover {
+      -webkit-transform: translate(0,-5px);
+      transform: translate(0,-5px);
+      -webkit-transform: translate(0,-5px);
+      transform: translate(0,-5px);
+      box-shadow: 1px 11px 40px -8px #fba66e;
+    }
+    .calendar__btn {
+      display: none;
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      transition: all .3s;
+      background-color: #fba66e;
+      box-shadow: -8px 12px 18px 0 rgba(232,109,49,.35);
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      line-height: 20px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .canvas__inner {
+      text-align: center;
+      padding-bottom: 70px;
+    }
   </style>
   <div class="container"></div>
+  <span class="calendar__btn">Взглянуть на график</span>
+  <div class="canvas__inner">
+    <canvas id="myCanvas" width="400" height="400" />
+  </div>
+
 </template>
 
 <script>
   (() => {
     const template = document.currentScript.ownerDocument.querySelector('template');
-    appViewCalendarFactory.$inject = ['app.main.model.view', 'app.main.component.appMonth'];
+    appViewCalendarFactory.$inject = ['app.main.model.view', 'app.main.util.Emitter', 'app.main.component.appMonth', 'app.main.component.appNote'];
     Core.module('app.main').component('app.main.component.appCalendar', appViewCalendarFactory);
 
-    function appViewCalendarFactory(viewModel, AppMonth) {
+    function appViewCalendarFactory(viewModel, Emitter, AppMonth, AppNote) {
 
       class AppCalendar extends HTMLElement {
         constructor() {
@@ -42,11 +73,117 @@
           const shadowRoot = this.attachShadow({mode: 'open'});
           this.rootElement = template.content.cloneNode(true);
           this.shadowRoot.appendChild(this.rootElement);
+          this.element = new Emitter();
 
-          const container = shadowRoot.querySelector('.container');
+          /* const */
+          const container = shadowRoot.querySelector('.container'),
+                btn = shadowRoot.querySelector('.calendar__btn');
+          /* end */
+
           container.appendChild(new AppMonth());
 
+          /* viewModel from app-day */
+          viewModel.subscribeMainViewName(name => {
+            const arr = [],
+                  trueArr = [];
+
+            let storageArr = localStorage.getItem('calendar');
+            storageArr = JSON.parse(storageArr);
+
+            for(let key in storageArr) {
+              storageArr[key].forEach((element) =>{
+                arr.push(element.status);
+
+              })
+            }
+            find(arr, 'Выполненно');
+            function find(arr, value) {
+              for (var i = 0; i < arr.length; i++) {
+                if (arr[i] === value) {
+                  trueArr.push(value);
+                };
+              }
+            }
+
+            /* check arr.length for btn */
+            if(arr.length !== 0){
+              btn.style.display = 'inline-block';
+            } else {
+              btn.style.display = '';
+            }
+            /* end */
+
+            /* set value for canvas */
+            let completedTasks = trueArr.length,
+                allTasks = arr.length;
+            this.canvas(completedTasks, allTasks, shadowRoot);
+          /* end */
+
+
+
+          }, true);
+
+          /* click for scroll bottom */
+          btn.addEventListener("click", event => {
+            window.scrollBy({
+              top: document.body.scrollHeight || document.documentElement.scrollHeight,
+              behavior: 'smooth'
+            });
+          })
+          /* end */
+
         }
+
+        canvas(completedTasks, allTasks, shadowRoot) {
+
+          const canvas = shadowRoot.getElementById('myCanvas'),
+                ctx = canvas.getContext('2d'),
+                data = {
+                  label: "Выполненно",
+                  value: completedTasks,
+                  color: '#fba66e'
+                },
+                middle = {
+                  x: canvas.width / 2,
+                  y: canvas.height / 2,
+                  radius: canvas.height / 2
+                };
+
+
+          let previousRadian,
+              total = allTasks,
+              percentage = parseInt((data.value / total) * 100),
+              radian = (Math.PI * 2) * (data.value / total),
+              labelText =  data.label + " " + percentage  + "%";
+
+          /* background */
+          ctx.beginPath();
+          ctx.arc(middle.x, middle.y, middle.radius, 0, 2 * Math.PI);
+          ctx.closePath();
+          ctx.stroke();
+          ctx.fillStyle = "#9aa5ab";
+          ctx.fill();
+          /* end */
+
+          previousRadian = previousRadian || 0;
+          ctx.beginPath();
+          ctx.fillStyle = data.color;
+          ctx.moveTo(middle.x, middle.y);
+          ctx.arc(middle.x, middle.y, middle.radius - 2, previousRadian, previousRadian + radian, false);
+          ctx.closePath();
+          ctx.fill();
+          ctx.save();
+          ctx.translate(middle.x, middle.y);
+          ctx.fillStyle = "white";
+          ctx.font = middle.radius / 9 + "px Roboto, sans-serif";
+          ctx.rotate(previousRadian + radian);
+          ctx.fillText(labelText, ctx.measureText(labelText).width / 50, 0);
+          ctx.restore();
+
+          previousRadian += radian;
+
+        }
+
       }
       customElements.define('app-calendar', AppCalendar);
       return AppCalendar;

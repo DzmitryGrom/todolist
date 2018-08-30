@@ -108,6 +108,7 @@
           /* detecting index note-view and set data to inputs  */
           if(this.dateIndex || this.dateIndex === 0) {
 
+
             btnDelete.style.display = '';
 
             this.storage = this.storage ? JSON.parse(this.storage) : {};
@@ -192,6 +193,7 @@
 
           /* events clicks on others buttons */
           shadowRoot.addEventListener('click', (event) => {
+
             let target = event.target;
 
             if(target.classList.contains('note__btn-close')) {
@@ -212,11 +214,11 @@
 
         }
 
+
         /* method removeItemStorage removes item from storage */
         removeItemStorage() {
 
           let newArr = JSON.parse(localStorage.getItem('calendar'));
-
 
           if(this.dateIndex === 0) {
             newArr[this.calendarKey].shift();
@@ -227,17 +229,18 @@
           localStorage.setItem('calendar', JSON.stringify(newArr));
 
         }
+
         /* end */
 
         /* method subscribeNoteChange */
         subscribeNoteChange(callback, immediateCall) {
           this.emitterChange.subscribe(callback, immediateCall);
         }
+
         /* end */
         closeOutSide(event){
           this.container.addEventListener("click", event => {
             if(event.target.classList.contains('note__shadow')) {
-              console.log(event.target);
               this.emitterChange.emit();
               this.remove();
             }

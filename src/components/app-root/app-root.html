@@ -24,7 +24,7 @@
         this.shadow.appendChild(this.rootElement);
         this.renderCalendar();
       }
-
+      /* method render */
       renderCalendar() {
         const container = this.shadow.querySelector('app-calendar');
         window.scrollTo(0, 0);
@@ -35,7 +35,9 @@
         }
         this.shadow.appendChild(new AppCalendar());
       }
+      /* end */
     }
+
     customElements.define('app-root', AppRoot);
     return new AppRoot();
   }

@@ -62,8 +62,7 @@
 
           this.shadowRoot.appendChild(this.rootElement);
 
-
-
+          /* constants */
           const menuActiveSolid = shadowRoot.querySelector('.header__item-active'),
                 menuList = shadowRoot.querySelector('.header__list'),
                 menuItem = shadowRoot.querySelectorAll('.header__item'),
@@ -72,17 +71,27 @@
                 now = moment(),
                 day = now.format('dddd, DD MMMM'),
                 curDate = now.format('M') -1;
+          /* end */
 
+          /* add class _active */
           menuItem[curDate].classList.add('header__item_active');
+          /* end */
 
+          /* varibles */
           let active = shadowRoot.querySelector('.header__item_active'),
               isOpen = false;
+          /* end */
 
+          /* set value date */
           headerDate.innerHTML = `<p class="header__today-name">сегодня</p> <p class="header__today-date" day="${day}">${day}</p>`;
+          /* end */
 
+          /* set value in service and call renderCalendar */
           calendarModelService.setCurrentMonth(curDate);
           AppRoot.renderCalendar();
+          /* end */
 
+          /* events */
           shadowRoot.addEventListener("click", event => {
             const currentElement = event.target;
             if (currentElement.parentNode.classList.contains('icon-burger')) {
@@ -96,6 +105,7 @@
             } else {
               menuList.classList.remove('header__list_open');
             }
+            /* change position solid  */
             if (currentElement.tagName === 'SPAN') {
               let attr = currentElement.getAttribute('tabindex');
               menuActiveSolid.style.width = currentElement.clientWidth + 'px';
@@ -104,12 +114,16 @@
               calendarModelService.setCurrentMonth(attr);
               AppRoot.renderCalendar();
             }
+            /* end */
           });
+          /* end */
 
+          /* set value date */
           window.onload = function() {
             menuActiveSolid.style.width = active.offsetWidth + 'px';
             menuActiveSolid.style.left = active.offsetLeft + 'px';
           };
+          /* end */
 
         }
 
