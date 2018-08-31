@@ -33,7 +33,6 @@
 
           super();
           const shadowRoot = this.attachShadow({mode: 'open'});
-
           this.rootElement = template.content.cloneNode(true);
           this.shadowRoot.appendChild(this.rootElement);
 
@@ -41,9 +40,11 @@
 
           let week = data.map(day => new AppDay(day));
 
+          /* set day */
           week.forEach(day => {
             container.appendChild(day);
           });
+          /* end */
 
         }
 

@@ -22,9 +22,8 @@
   position: fixed;
   right: 20px;
   bottom: 20px;
-  transition: all 0.3s;
+  font-size: 20px;
   background-color: #fba66e;
-  box-shadow: -8px 12px 18px 0 rgba(232, 109, 49, 0.35);
   color: #fff;
   padding: 10px 20px;
   font-size: 16px;
@@ -33,6 +32,8 @@
   border-radius: 4px;
 }
 .calendar__btn:hover {
+  transition: all 0.2s ease;
+  -vendors-transition: all 0.2s ease;
   -webkit-transform: translate(0, -5px);
   transform: translate(0, -5px);
   box-shadow: 1px 11px 40px -8px #fba66e;

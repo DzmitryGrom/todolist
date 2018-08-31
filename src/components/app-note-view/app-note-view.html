@@ -37,17 +37,19 @@
           this.rootElement = template.content.cloneNode(true);
           this.shadowRoot.appendChild(this.rootElement);
 
-          this.category = shadowRoot.querySelector('.note-view__category');
-          this.content = shadowRoot.querySelector('.note-view__content');
-          this.header = shadowRoot.querySelector('.note-view__header');
-          this.status = shadowRoot.querySelector('.note-view__status');
+          /* varibles */
+          let category = shadowRoot.querySelector('.note-view__category'),
+              content = shadowRoot.querySelector('.note-view__content'),
+              status = shadowRoot.querySelector('.note-view__status');
+          /* end */
 
+          /* set value to note-view */
+          category.innerText = `${item.category}`;
+          content.innerText = `${item.content}`;
+          status.innerText = `${item.status}`;
+          /* end */
 
-          this.category.innerText = `${item.category}`;
-          this.content.innerText = `${item.content}`;
-          this.status.innerText = `${item.status}`;
-
-          /*  event for component */
+          /* event for call app-note */
           this.addEventListener('click', event => {
             /* custom event for open note */
             var event = new CustomEvent("changeNote", {
@@ -60,7 +62,7 @@
             /* end */
 
           })
-          /* end */
+
         }
 
       }

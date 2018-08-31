@@ -1,10 +1,11 @@
-const module = Core.module('app.main');
+(() => {
+  const module = Core.module('app.main');
 
-module.run();
+  module.run();
 
-const AppRootElement = module.get('app.main.component.appRoot'),
-      viewModel = module.get('app.main.model.view');
+  const AppRootElement = module.get('app.main.component.appRoot');
 
-const appRootElement = AppRootElement;
+  const appRootElement = AppRootElement;
 
-document.body.appendChild(appRootElement);
+  document.body.appendChild(appRootElement);
+})();

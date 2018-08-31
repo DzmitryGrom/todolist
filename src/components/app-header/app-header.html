@@ -50,9 +50,9 @@
 <script>
   (() => {
     const template = document.currentScript.ownerDocument.querySelector('template');
-    appHeaderFactory.$inject = ['app.main.model.calendar', 'app.main.model.view', 'app.main.component.appRoot'];
+    appHeaderFactory.$inject = ['app.main.model.calendar', 'app.main.component.appRoot'];
     Core.module('app.main').component('app.main.component.appHeader', appHeaderFactory);
-    function appHeaderFactory(calendarModelService, viewModel, AppRoot) {
+    function appHeaderFactory(calendarModelService, AppRoot) {
       class AppHeader extends HTMLElement {
         constructor() {
           super();

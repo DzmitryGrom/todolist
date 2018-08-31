@@ -1,6 +1,5 @@
 (() => {
-  //
-  calendarFactory.$inject = ['app.main.util.Emitter'];
+  calendarFactory.$inject = [];
   Core.module('app.main').service('app.main.model.calendar', calendarFactory);
   function calendarFactory() {
 

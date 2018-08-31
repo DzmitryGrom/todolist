@@ -58,9 +58,9 @@
 <script>
   (() => {
     const template = document.currentScript.ownerDocument.querySelector('template');
-    appNoteFactory.$inject = ['app.main.model.view', 'app.main.util.Emitter'];
+    appNoteFactory.$inject = ['app.main.util.Emitter'];
     Core.module('app.main').component('app.main.component.appNote', appNoteFactory);
-    function appNoteFactory(viewModel,  Emitter) {
+    function appNoteFactory(Emitter) {
 
 
       class AppNote extends HTMLElement {
@@ -105,9 +105,8 @@
           /* end */
 
 
-          /* detecting index note-view and set data to inputs  */
+          /* detecting index note-view and set data to inputs  and call app-note  */
           if(this.dateIndex || this.dateIndex === 0) {
-
 
             btnDelete.style.display = '';
 
@@ -128,7 +127,7 @@
           }
           /* end */
 
-
+          /* event for activate button submit */
           form.addEventListener('input', event => {
 
             if(form.elements.content.value !== '' || form.elements.category.value !== '' ) {
@@ -138,6 +137,8 @@
             }
 
           })
+          /* end */
+
           /* event submit on form */
           form.addEventListener('submit', event => {
 
@@ -186,7 +187,9 @@
 
             }
 
+            /* emitter for app-day */
             this.emitterChange.emit();
+            /* end */
 
           })
           /* end */
@@ -229,15 +232,15 @@
           localStorage.setItem('calendar', JSON.stringify(newArr));
 
         }
-
         /* end */
 
         /* method subscribeNoteChange */
         subscribeNoteChange(callback, immediateCall) {
           this.emitterChange.subscribe(callback, immediateCall);
         }
-
         /* end */
+
+        /* closeOutSide method for a note when pressed out  */
         closeOutSide(event){
           this.container.addEventListener("click", event => {
             if(event.target.classList.contains('note__shadow')) {
@@ -245,6 +248,7 @@
               this.remove();
             }
           })
+          /* end */
 
         }
 
