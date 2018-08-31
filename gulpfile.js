@@ -24,6 +24,10 @@ gulp.task('compile-less', function() {
   gulp.src('./src/components/app-note-view/app-note-view.less')
     .pipe(less())
     .pipe(gulp.dest('./src/components/app-note-view/'));
+
+  gulp.src('./src/components/app-calendar/app-calendar.less')
+    .pipe(less())
+    .pipe(gulp.dest('./src/components/app-calendar/'));
 });
 
 /* Task to watch less changes */

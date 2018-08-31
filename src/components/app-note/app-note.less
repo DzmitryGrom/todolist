@@ -26,9 +26,14 @@
       z-index: 5;
       padding: 16px;
       cursor: pointer;
-      .icon-prop();
       path {
-        fill: @color-black;
+        fill: @color-gray;
+      }
+      .icon-prop();
+      &:hover {
+        path {
+          fill:  @color-black;
+        }
       }
     }
     &-send {
@@ -117,7 +122,6 @@
     .appearance-none();
   }
   &__tooltip {
-    display: none;
     opacity: 0;
     visibility: hidden;
     position: absolute;
@@ -151,8 +155,9 @@
     right: -4px;
     z-index: 2;
     cursor: pointer;
+    .icon-prop();
     &:hover {
-      & .day__tooltip {
+      .note__tooltip {
         opacity: 1;
         visibility: visible;
       }

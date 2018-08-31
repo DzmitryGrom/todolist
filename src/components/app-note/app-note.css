@@ -28,6 +28,9 @@
   padding: 16px;
   cursor: pointer;
 }
+.note__btn-close path {
+  fill: #9aa5ab;
+}
 .note__btn-close [class^="icon-"],
 .note__btn-close [class*=" icon-"] {
   font-size: 24px;
@@ -52,7 +55,7 @@
 .note__btn-close [class*=" icon-"]:hover polygon {
   fill: #333333;
 }
-.note__btn-close path {
+.note__btn-close:hover path {
   fill: #333333;
 }
 .note__btn-send {
@@ -146,7 +149,6 @@
   appearance: none;
 }
 .note__tooltip {
-  display: none;
   opacity: 0;
   visibility: hidden;
   position: absolute;
@@ -181,7 +183,31 @@
   z-index: 2;
   cursor: pointer;
 }
-.note__info:hover .day__tooltip {
+.note__info [class^="icon-"],
+.note__info [class*=" icon-"] {
+  font-size: 24px;
+  vertical-align: middle;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.note__info [class^="icon-"] path,
+.note__info [class*=" icon-"] path,
+.note__info [class^="icon-"] polygon,
+.note__info [class*=" icon-"] polygon {
+  -webkit-transition: fill 0.2s ease;
+  transition: fill 0.2s ease;
+  fill: #9aa5ab;
+}
+.note__info [class^="icon-"]:hover path,
+.note__info [class*=" icon-"]:hover path,
+.note__info [class^="icon-"]:hover polygon,
+.note__info [class*=" icon-"]:hover polygon {
+  fill: #333333;
+}
+.note__info:hover .note__tooltip {
   opacity: 1;
   visibility: visible;
 }

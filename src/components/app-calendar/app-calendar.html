@@ -4,56 +4,31 @@
       display: block;
       width: 100%;
       min-height: 100%;
-      max-width: 1085px;
       margin: 0 auto;
       padding-top: 90px;
       box-sizing: border-box;
-      @media (min-width:1500px) {
-        max-width: 1450px;
-      }
-      @media (min-width:1900px) {
-        max-width: 1810px;
-      }
-      @media (max-width:1100px) {
-        max-width: 720px;
-      }
-      @media (max-width:720px) {
-        max-width: 360px;
-      }
-      @media (max-width:400px) {
-        width: 100%;
-      }
+      /*@media (min-width:1500px) {*/
+        /*max-width: 1450px;*/
+      /*}*/
+      /*@media (min-width:1900px) {*/
+        /*max-width: 1810px;*/
+      /*}*/
+      /*@media (max-width:1100px) {*/
+        /*max-width: 720px;*/
+      /*}*/
+      /*@media (max-width:720px) {*/
+        /*max-width: 360px;*/
+      /*}*/
+      /*@media (max-width:400px) {*/
+        /*width: 100%;*/
+      /*}*/
     }
-    .calendar__btn:hover {
-      -webkit-transform: translate(0,-5px);
-      transform: translate(0,-5px);
-      -webkit-transform: translate(0,-5px);
-      transform: translate(0,-5px);
-      box-shadow: 1px 11px 40px -8px #fba66e;
-    }
-    .calendar__btn {
-      display: none;
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      transition: all .3s;
-      background-color: #fba66e;
-      box-shadow: -8px 12px 18px 0 rgba(232,109,49,.35);
-      color: #fff;
-      padding: 10px 20px;
-      font-size: 16px;
-      line-height: 20px;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-    .canvas__inner {
-      text-align: center;
-      padding-bottom: 70px;
-    }
+
   </style>
-  <div class="container"></div>
+  <link rel="stylesheet" href="/components/app-calendar/app-calendar.css">
+  <div class="calendar__inner"></div>
   <span class="calendar__btn">Взглянуть на график</span>
-  <div class="canvas__inner">
+  <div class="calendar__canvas-inner">
     <canvas id="myCanvas" width="400" height="400" />
   </div>
 
@@ -76,7 +51,7 @@
           this.element = new Emitter();
 
           /* const */
-          const container = shadowRoot.querySelector('.container'),
+          const container = shadowRoot.querySelector('.calendar__inner'),
                 btn = shadowRoot.querySelector('.calendar__btn');
           /* end */
 
