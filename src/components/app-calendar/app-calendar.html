@@ -16,7 +16,6 @@
   <div class="calendar__canvas-inner">
     <canvas id="myCanvas" width="400" height="400" />
   </div>
-
 </template>
 
 <script>
@@ -98,7 +97,7 @@
         }
 
         canvas(completedTasks, allTasks, shadowRoot) {
-
+          /* const */
           const canvas = shadowRoot.getElementById('myCanvas'),
                 ctx = canvas.getContext('2d'),
                 data = {
@@ -111,13 +110,16 @@
                   y: canvas.height / 2,
                   radius: canvas.height / 2.5
                 };
+          /* end */
 
-
+          /* varibles */
           let previousRadian,
               total = allTasks,
               percentage = parseInt((data.value / total) * 100),
               radian = (Math.PI * 2) * (data.value / total),
               labelText =  data.label + " " + percentage  + "%";
+
+          /* end */
 
           /* background */
           ctx.beginPath();
@@ -128,6 +130,7 @@
           ctx.fill();
           /* end */
 
+          /* add circle with dates */
           previousRadian = previousRadian || 0;
           ctx.beginPath();
           ctx.fillStyle = data.color;
@@ -143,6 +146,7 @@
           ctx.restore();
 
           previousRadian += radian;
+          /* end */
 
         }
 

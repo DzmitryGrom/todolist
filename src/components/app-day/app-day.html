@@ -47,31 +47,41 @@
           shadowRoot.appendChild(this.rootElement);
           this.noteContainer = shadowRoot.querySelector('.day__note-container');
           this.noteInner = shadowRoot.querySelector('.day__inner');
+          /* clear style for noteViewVal */
           this.noteViewVal = '';
+          /* end */
           this.data = data;
           this.body = document.querySelector('body');
+          /* clear style for noteInner */
           this.noteInner.style.zIndex = '';
+          /* end */
 
+          /* varible label */
           let label =  shadowRoot.querySelector('.day__label');
+          /* end */
 
+          /* add text for label */
           label.innerText = `${data.dayName}, ${data.date}`;
+          /* end */
 
           /* events for component */
           shadowRoot.addEventListener('click', event => {
             let target = event.target;
 
             if(target.tagName === 'SPAN') {
+              /* add app-note */
               this.createNote();
+              /* end */
             }
 
           }, false);
           /* end */
 
-          /* render note-view */
+          /* call render */
           this.render();
           /* end */
 
-          /*event for app-note*/
+          /*event from app-note*/
           shadowRoot.addEventListener("changeNote",event => {
             this.noteViewVal = event.detail.data;
             this.editNote(this.noteViewVal);
@@ -80,9 +90,8 @@
           /* end */
 
         }
-        /* method create note */
 
-        /* set style for body */
+        /* set style for body and  noteInner */
         setStyle(){
           this.body.style.overflow = 'hidden';
           this.noteInner.style.zIndex = '6';
@@ -114,7 +123,9 @@
 
         /* method edit note */
         editNote(noteViewVal) {
+          /* add varible and call app-note with dates */
           let el = new AppNote(noteViewVal);
+          /* end */
 
           el.subscribeNoteChange(value => {
             this.render();
@@ -149,7 +160,9 @@
               item.day = this.data.day;
               item.month = this.data.month;
               item.year = this.data.year;
+              /* add app-note-view */
               this.noteContainer.appendChild(new AppNoteView(item));
+              /* end */
             })
           }
 

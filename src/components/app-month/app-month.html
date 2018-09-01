@@ -27,10 +27,13 @@
 
           const container = shadowRoot.querySelector('.container');
 
-//          let weeks = calendarModelService.map(week => new AppWeek(week));
+          /* set varible and call app-week and with dates*/
           let weeks = calendarModelService.getCurrentMonthWeeks().map(week => new AppWeek(week));
+          /* end */
 
+          /* add week */
           weeks.forEach(week => container.appendChild(week));
+          /* end */
 
         }
 

@@ -30,10 +30,14 @@
         window.scrollTo(0, 0);
         if(container) {
           setTimeout(() => {
+            /* remove last calendar */
             this.shadow.querySelector('app-calendar').remove();
+            /* end */
           }, 200);
         }
+        /* add new calendar */
         this.shadow.appendChild(new AppCalendar());
+        /* end */
       }
       /* end */
     }

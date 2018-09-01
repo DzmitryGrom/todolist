@@ -75,8 +75,13 @@
           this.date = date;
           this.calendarKey = [this.date.year, this.date.month, this.date.day].join('-');
           this.container = shadowRoot.querySelector('.note__inner');
+          /* add emitter for app-note */
+          this.emitterChange = new Emitter();
+          /* end */
 
+          /* call closeOutSide */
           this.closeOutSide(event);
+          /* end */
 
           /* varibles */
           let editor = shadowRoot.querySelector('textarea'),
@@ -89,8 +94,6 @@
           btnDelete.style.display = 'none';
           submitButton.setAttribute('disabled', '');
           /* end */
-
-          this.emitterChange = new Emitter();
 
           /* npm autosize */
           editor.addEventListener('keydown', autosize);
@@ -146,14 +149,18 @@
 
             this.remove();
 
+           /* varibles */
             let i = form.elements.length,
                 val = {};
+            /* end */
 
+            /* while for inputs */
             while(i--){
               if (form.elements[i].name) {
                 val[form.elements[i].name] = form.elements[i].value;
               }
             }
+            /* end */
 
             /* detecting index note, if undefined - create new, if !== undefined - edit this */
             if(this.dateIndex === undefined) {
@@ -201,15 +208,21 @@
 
             if(target.classList.contains('note__btn-close')) {
                 this.remove();
+                /* emitter for app-note */
                 this.emitterChange.emit();
+                /* end */
               }
             if(target.classList.contains('note__btn-delete')) {
 
               this.removeItemStorage();
 
+              /* emitter for app-note */
               this.emitterChange.emit();
+              /* end */
 
+              /* remove component */
               this.remove();
+              /* end */
 
             }
           });
@@ -244,8 +257,13 @@
         closeOutSide(event){
           this.container.addEventListener("click", event => {
             if(event.target.classList.contains('note__shadow')) {
+              /* emitter for app-note */
               this.emitterChange.emit();
+              /* end */
+
+              /* remove component */
               this.remove();
+              /* end */
             }
           })
           /* end */

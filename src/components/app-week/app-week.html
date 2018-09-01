@@ -38,9 +38,11 @@
 
           const container = shadowRoot.querySelector('.container');
 
+          /* add varible and call app-day with dates */
           let week = data.map(day => new AppDay(day));
+          /* end */
 
-          /* set day */
+          /* add day */
           week.forEach(day => {
             container.appendChild(day);
           });
