@@ -52,6 +52,7 @@
   .header__list {
     padding: 30px 10px 20px;
     position: fixed;
+    z-index: 3;
     right: 0;
     top: 0;
     bottom: 0;
@@ -97,7 +98,19 @@
     display: none;
   }
 }
+.header__icon-burger:before,
+.header__icon-close:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
 .header__icon-burger {
+  position: relative;
+  z-index: 2;
   display: none;
 }
 @media (max-width: 920px) {

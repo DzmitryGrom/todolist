@@ -27,11 +27,13 @@
   }
   &__btn {
     &-add {
-      .icon-prop();
+      position: relative;
+      z-index: 1;
       line-height: 1;
       display: inline-block;
       cursor: pointer;
       color: @color-gray;
+      .icon-prop();
       &-text {
         display: inline-block;
         vertical-align: middle;
@@ -44,6 +46,15 @@
         path {
           fill: @color-black;
         }
+      }
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
       }
     }
   }

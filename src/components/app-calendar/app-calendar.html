@@ -68,7 +68,6 @@
 
             /* check arr.length for btn */
             if(arr.length !== 0){
-
               btn.style.display = 'inline-block';
             } else {
               btn.style.display = '';
@@ -79,7 +78,7 @@
             let completedTasks = trueArr.length,
                 allTasks = arr.length;
             this.canvas(completedTasks, allTasks, shadowRoot);
-          /* end */
+            /* end */
 
 
 
@@ -98,6 +97,9 @@
 
         canvas(completedTasks, allTasks, shadowRoot) {
           /* const */
+          if(completedTasks) {
+
+          }
           const canvas = shadowRoot.getElementById('myCanvas'),
                 ctx = canvas.getContext('2d'),
                 data = {
@@ -114,8 +116,8 @@
 
           /* varibles */
           let previousRadian,
-              total = allTasks,
-              percentage = parseInt((data.value / total) * 100),
+              total = allTasks || 0,
+              percentage = parseInt((data.value / total) * 100) || 0,
               radian = (Math.PI * 2) * (data.value / total),
               labelText =  data.label + " " + percentage  + "%";
 

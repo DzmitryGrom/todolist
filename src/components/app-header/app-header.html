@@ -86,15 +86,18 @@
           headerDate.innerHTML = `<p class="header__today-name">сегодня</p> <p class="header__today-date" day="${day}">${day}</p>`;
           /* end */
 
-
+          /* set value in service and call renderCalendar */
+          calendarModelService.setCurrentMonth(curDate);
+          AppRoot.renderCalendar();
+          /* end */
 
           /* events */
           shadowRoot.addEventListener("click", event => {
             const currentElement = event.target;
-            if (currentElement.parentNode.classList.contains('icon-burger')) {
+            if (currentElement.classList.contains('icon-burger')) {
               isOpen = true;
             }
-            if (currentElement.parentNode.classList.contains('icon-close')) {
+            if (currentElement.classList.contains('icon-close')) {
               isOpen = false;
             }
             if (isOpen === true) {
@@ -115,12 +118,7 @@
           });
           /* end */
 
-          /* set value in service and call renderCalendar */
-          calendarModelService.setCurrentMonth(curDate);
-          AppRoot.renderCalendar();
-          /* end */
-
-          /* set value menuActiveSolid */
+          /* set value  */
           window.onload = function() {
             menuActiveSolid.style.width = active.offsetWidth + 'px';
             menuActiveSolid.style.left = active.offsetLeft + 'px';

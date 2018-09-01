@@ -27,6 +27,8 @@
   margin: 0 8px 8px;
 }
 .day__btn-add {
+  position: relative;
+  z-index: 1;
   line-height: 1;
   display: inline-block;
   cursor: pointer;
@@ -67,6 +69,15 @@
 }
 .day__btn-add:hover path {
   fill: #333333;
+}
+.day__btn-add:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
 }
 .day__note {
   border-radius: 4px;
