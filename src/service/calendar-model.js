@@ -46,10 +46,7 @@
           date: d.format('D MMMM'),
           day: d.format('D') * 1,
           month: d.format('M') * 1,
-          year: d.format('YYYY') * 1,
-          isYesterday: isYesterday,
-          isCurrentDay: isTodayDay,
-          isCurrentMonth: parseInt(d.format('M')) === this.month
+          year: d.format('YYYY') * 1
         };
 
       }));
